@@ -11,7 +11,7 @@ export CC=cc #gcc
 export CRAYPE_LINK_TYPE=dynamic
 export NO_CUDA=1
 export WITH_DISTRIBUTED=1
-export MAX_JOBS=4
+export MAX_JOBS=5
 
 # Download PyTorch
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
@@ -21,8 +21,6 @@ cd pytorch
 # Build PyTorch; calling build twice because first always fails due to
 # weird interaction between compiler wrapper flags and pytorch build flags.
 # Rebuilding seems to fix it.
-python setup.py build
-python setup.py build
 python setup.py install
 
 # Download torchvision
