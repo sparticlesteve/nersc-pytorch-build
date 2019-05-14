@@ -3,6 +3,7 @@
 # Configure the installation
 source ./config.sh
 conda activate $INSTALL_DIR
+echo "Building PyTorch on $(hostname)"
 
 # Configure the build
 export CMAKE_PREFIX_PATH=$INSTALL_DIR
@@ -18,9 +19,7 @@ mkdir -p $BUILD_DIR && cd $BUILD_DIR
 git clone --recursive --branch $PYTORCH_VERSION $PYTORCH_URL
 cd pytorch
 
-# Build PyTorch; calling build twice because first always fails due to
-# weird interaction between compiler wrapper flags and pytorch build flags.
-# Rebuilding seems to fix it.
+# Build PyTorch
 python setup.py install
 
 # Download torchvision
