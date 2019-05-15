@@ -3,7 +3,6 @@
 # Configure the installation
 source ./config.sh
 conda activate $INSTALL_DIR
-echo "Building PyTorch on $(hostname)"
 
 # Configure the build
 export CMAKE_PREFIX_PATH=$INSTALL_DIR
