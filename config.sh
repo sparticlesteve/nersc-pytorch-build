@@ -5,6 +5,7 @@ if [ $USER == "swowner" ]; then
     INSTALL_BASE=/usr/common/software
 else
     INSTALL_BASE=$SCRATCH/conda
+fi
 
 # Configure the installation
 export INSTALL_NAME="pytorch"
