@@ -6,11 +6,12 @@ conda activate $INSTALL_DIR
 
 # Configure the build
 export CMAKE_PREFIX_PATH=$INSTALL_DIR
-export CXX=CC #g++
-export CC=cc #gcc
-export CRAYPE_LINK_TYPE=dynamic
-export NO_CUDA=1
+export CXX=mpic++ #g++
+export CC=mpicc #gcc
+#export CRAYPE_LINK_TYPE=dynamic
+#export NO_CUDA=1
 export WITH_DISTRIBUTED=1
+export USE_SYSTEM_NCCL=1
 export MAX_JOBS=5
 
 # Download PyTorch
