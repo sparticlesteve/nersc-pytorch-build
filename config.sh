@@ -23,6 +23,6 @@ module load PrgEnv-gnu
 source /usr/common/software/python/3.6-anaconda-5.2/etc/profile.d/conda.sh
 
 # Print some stuff
-echo "Installing on $(hostname) as $USER"
+echo "Configuring on $(hostname) as $USER"
 echo "  Build directory $BUILD_DIR"
 echo "  Install directory $INSTALL_DIR"
