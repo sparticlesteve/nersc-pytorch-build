@@ -15,12 +15,12 @@ export MAX_JOBS=5
 
 # Download PyTorch
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
-git clone --recursive --branch $PYTORCH_VERSION $PYTORCH_URL
+git clone --recursive $PYTORCH_URL
 cd pytorch
+git checkout $PYTORCH_VERSION 
+git submodule update --recursive
 
-# Build PyTorch; calling build twice because first always fails due to
-# weird interaction between compiler wrapper flags and pytorch build flags.
-# Rebuilding seems to fix it.
+# Build PyTorch
 python setup.py install
 
 # Download torchvision
