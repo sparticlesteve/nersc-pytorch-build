@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Configure the installation
 source ./config.sh
@@ -9,13 +9,17 @@ export CMAKE_PREFIX_PATH=$INSTALL_DIR
 export CXX=mpic++ #g++
 export CC=mpicc #gcc
 #export CRAYPE_LINK_TYPE=dynamic
-#export NO_CUDA=1
-export WITH_DISTRIBUTED=1
-export USE_SYSTEM_NCCL=1
-export MAX_JOBS=5
+#export USE_SYSTEM_NCCL=1 # no effect?
+export USE_CUDA=1
+export USE_DISTRIBUTED=1
+export MAX_JOBS=40
+
+# Disabling Caffe2 ops because of a current build issue
+export BUILD_CAFFE2_OPS=0
 
 # Download PyTorch
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
+[ -d pytorch ] && rm -rf pytorch
 git clone --recursive --branch $PYTORCH_VERSION $PYTORCH_URL
 cd pytorch
 
