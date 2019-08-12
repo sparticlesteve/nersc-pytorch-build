@@ -1,7 +1,6 @@
-#!/bin/bash
+#!/bin/bash -e
 
-. config.sh
-conda activate $INSTALL_DIR
+. activate.sh
 module load esslurm
 
 # 1 node, 1 gpu
