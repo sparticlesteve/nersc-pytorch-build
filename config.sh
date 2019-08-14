@@ -19,6 +19,7 @@ export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/${PYTORCH_VERSION}-gpu
 module load gcc/7.3.0
 module load cuda/10.1.168
 module load openmpi/4.0.1-ucx-1.6
+module unload craype-hugepages2M
 
 # Setup conda
 source /usr/common/software/python/3.7-anaconda-2019.07/etc/profile.d/conda.sh
