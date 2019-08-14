@@ -8,7 +8,6 @@ conda activate $INSTALL_DIR
 export CMAKE_PREFIX_PATH=$INSTALL_DIR
 export CXX=mpic++ #g++
 export CC=mpicc #gcc
-#export CRAYPE_LINK_TYPE=dynamic
 #export USE_SYSTEM_NCCL=1 # no effect?
 export USE_CUDA=1
 export USE_DISTRIBUTED=1
