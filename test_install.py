@@ -1,3 +1,5 @@
+import argparse
+
 import torch
 import torch.distributed as dist
 
@@ -12,9 +14,32 @@ def test_cuda():
     print('CUDA available:', torch.cuda.is_available())
     print('CUDA device:', torch.cuda.current_device())
 
+def test_torchvision():
+    """TODO"""
+    pass
+
+def test_geometric():
+    """TODO"""
+    pass
+
 def main():
-    test_mpi()
-    test_cuda()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--mpi', action='store_true')
+    parser.add_argument('--cuda', action='store_true')
+    parser.add_argument('--vision', action='store_true')
+    parser.add_argument('--geometric', action='store_true')
+    parser.add_argument('--all', action='store_true')
+    args = parser.parse_args()
+
+    # Run the tests
+    if args.mpi or args.all:
+        test_mpi()
+    if args.cuda or args.all:
+        test_cuda()
+    if args.vision or args.all:
+        test_torchvision()
+    if args.geometric or args.all:
+        test_geometric()
 
 if __name__ == '__main__':
     main()
