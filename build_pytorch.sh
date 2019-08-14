@@ -17,6 +17,10 @@ export MAX_JOBS=40
 # Disabling Caffe2 ops because of a current build issue
 export BUILD_CAFFE2_OPS=0
 
+# Build for V100 GPU only
+# https://discuss.pytorch.org/t/pytorch-1-2-0-build-fails-on-error-identifier-ldg-is-undefined/52409
+export TORCH_CUDA_ARCH_LIST=7.0
+
 # Download PyTorch
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
 [ -d pytorch ] && rm -rf pytorch
