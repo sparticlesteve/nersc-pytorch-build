@@ -9,8 +9,8 @@ export CMAKE_PREFIX_PATH=$INSTALL_DIR
 export CXX=CC #g++
 export CC=cc #gcc
 export CRAYPE_LINK_TYPE=dynamic
-export NO_CUDA=1
-export WITH_DISTRIBUTED=1
+export USE_CUDA=0
+export USE_DISTRIBUTED=1
 export MAX_JOBS=5
 
 # Download PyTorch
