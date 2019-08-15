@@ -2,9 +2,9 @@
 #SBATCH -C haswell
 #SBATCH -N 2
 #SBATCH -q debug
-#SBATCH -t 10
+#SBATCH -t 5
 
-. ../config.sh
+. config.sh
 conda activate $INSTALL_DIR
 
-srun python test_mpi.py
+srun -l -u python test_install.py --mpi --vision --geometric
