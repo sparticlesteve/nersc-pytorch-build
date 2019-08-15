@@ -15,6 +15,7 @@ export MAX_JOBS=5
 
 # Download PyTorch
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
+[ -d pytorch ] && rm -rf pytorch
 git clone --recursive --branch $PYTORCH_VERSION $PYTORCH_URL
 cd pytorch
 
@@ -23,6 +24,7 @@ python setup.py install
 
 # Download torchvision
 cd ..
+[ -d vision ] && rm -rf vision
 git clone --branch $VISION_VERSION https://github.com/pytorch/vision.git
 cd vision
 python setup.py install

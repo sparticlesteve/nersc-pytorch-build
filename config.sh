@@ -18,9 +18,10 @@ export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 # Setup programming environment
 module unload PrgEnv-intel
 module load PrgEnv-gnu
+module unload craype-hugepages2M
 
 # Setup conda
-source /usr/common/software/python/3.6-anaconda-5.2/etc/profile.d/conda.sh
+source /usr/common/software/python/3.7-anaconda-2019.07/etc/profile.d/conda.sh
 
 # Print some stuff
 echo "Configuring on $(hostname) as $USER"
