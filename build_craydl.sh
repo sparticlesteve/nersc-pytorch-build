@@ -8,7 +8,7 @@
 #   /opt/cray/pe/craype-dl-plugin-py3/19.06.1/wheel/README
 #
 
-. activate.sh
+source activate.sh
 module load craype-dl-plugin-py3/19.06.1
 # Testing Kristi's "fixed" wheel
 pip install /global/cscratch1/sd/kristyn/plugin_rpms/dl_comm-19.6.1.tar.gz

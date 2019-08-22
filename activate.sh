@@ -1,3 +1,3 @@
 # Source this script
-. config.sh
+source config.sh
 conda activate $INSTALL_DIR

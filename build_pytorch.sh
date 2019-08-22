@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Configure the installation
-source ./config.sh
-conda activate $INSTALL_DIR
+source activate.sh
 
 # Configure the build
 export CMAKE_PREFIX_PATH=$INSTALL_DIR

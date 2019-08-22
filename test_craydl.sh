@@ -4,8 +4,7 @@
 #SBATCH -N 2
 #SBATCH -t 30
 
-. config.sh
-conda activate $INSTALL_DIR
+source activate.sh
 module load craype-dl-plugin-py3/19.06.1
 
 exampleScript=$CRAYPE_ML_PLUGIN_BASEDIR/examples/torch_mnist/pytorch_mnist.py
