@@ -33,6 +33,7 @@ python setup.py install
 
 # Download torchvision
 cd ..
+[ -d vision ] && rm -rf vision
 git clone --branch $VISION_VERSION https://github.com/pytorch/vision.git
 cd vision
 python setup.py install
