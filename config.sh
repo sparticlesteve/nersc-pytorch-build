@@ -11,7 +11,7 @@ fi
 export INSTALL_NAME="pytorch"
 export PYTORCH_VERSION="v1.2.0"
 export PYTORCH_URL=https://github.com/pytorch/pytorch
-export VISION_VERSION="v0.3.0"
+export VISION_VERSION="v0.4.0"
 export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/${PYTORCH_VERSION}-gpu
 export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/${PYTORCH_VERSION}-gpu
 
