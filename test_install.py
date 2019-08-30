@@ -12,6 +12,7 @@ def test_mpi():
 
 def test_cuda():
     print('CUDA available:', torch.cuda.is_available())
+    print('CUDA devices:', torch.cuda.device_count())
     print('CUDA device:', torch.cuda.current_device())
 
 def test_torchvision():
