@@ -1,17 +1,26 @@
 #!/bin/bash -e
+#SBATCH -C gpu
+#SBATCH --gres=gpu:8
+#SBATCH --exclusive
+#SBATCH -t 30
+#SBATCH -o slurm-test-%j.out
 
+# Setup environment
 . activate.sh
-module load esslurm
+export LD_LIBRARY_PATH=$INSTALL_DIR/lib/python3.6/site-packages/torch/lib:$LD_LIBRARY_PATH
+#export LD_PRELOAD=$MVAPICH2_DIR/lib/libmpi.so
 
-# 1 node, 1 gpu
-srun -C gpu -N 1 --gres=gpu:8 -c 10 -t 5 -u python test_install.py --all
+module list
+echo $LD_LIBRARY_PATH
 
-# 1 node, 8 ranks
-srun -C gpu -N 1 --gres=gpu:8 --exclusive \
-    -n 8 -c 10 -t 5 -u -l \
-    python test_install.py --all
+echo
+echo "----------- TEST 1 node, 1 gpu ------------"
+srun -N 1 -n 1 python test_install.py --all
 
-# 2 nodes, 16 ranks
-srun -C gpu -N 2 --gres=gpu:8 --exclusive \
-    -n 16 -c 10 -t 5 -u -l \
-    python test_install.py --all
+echo
+echo "----------- TEST 8 gpus per node ------------"
+srun --ntasks-per-node 8 -u -l python test_install.py --all
+
+echo
+echo "----------- TEST DistributedDataParallel training ------------"
+srun --ntasks-per-node 8 -u -l python test_ddp.py
