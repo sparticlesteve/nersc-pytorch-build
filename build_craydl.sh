@@ -8,8 +8,11 @@
 #   /opt/cray/pe/craype-dl-plugin-py3/19.06.1/wheel/README
 #
 
+# Setup our installation
 source activate.sh
+
+# Load the cray plugin module
 module load craype-dl-plugin-py3/19.06.1
-# Testing Kristi's "fixed" wheel
-pip install /global/cscratch1/sd/kristyn/plugin_rpms/dl_comm-19.6.1.tar.gz
-#pip install $CRAYPE_ML_PLUGIN_BASEDIR/wheel/dl_comm-19.6.1.tar.gz
+
+# The tarball wheel file there is broken; install this fixed one
+pip install /project/projectdirs/nstaff/swowner/craype-dl-plugin/dl_comm-19.6.1.tar.gz
