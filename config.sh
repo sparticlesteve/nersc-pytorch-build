@@ -19,6 +19,8 @@ export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 module unload PrgEnv-intel
 module load PrgEnv-gnu
 module unload craype-hugepages2M
+module unload cray-libsci
+module unload atp
 
 # Setup conda
 source /usr/common/software/python/3.7-anaconda-2019.07/etc/profile.d/conda.sh
