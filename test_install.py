@@ -15,12 +15,12 @@ def test_cuda():
     print('CUDA device:', torch.cuda.current_device())
 
 def test_torchvision():
-    """TODO"""
-    pass
+    import torchvision
+    print(torchvision)
 
 def test_geometric():
-    """TODO"""
-    pass
+    import torch_geometric
+    print(torch_geometric)
 
 def main():
     parser = argparse.ArgumentParser()
