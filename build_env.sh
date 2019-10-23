@@ -12,3 +12,6 @@ conda create -y --prefix $INSTALL_DIR python=3.6 \
 conda activate $INSTALL_DIR
 conda install -y -c pytorch magma-cuda101
 conda install -y -c conda-forge ipympl
+
+# Install tensorboard
+pip install tensorboard
