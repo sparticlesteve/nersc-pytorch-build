@@ -8,5 +8,9 @@ conda create -y --prefix $INSTALL_DIR python=3.6 \
     mkl mkl-include numpy pyyaml setuptools cmake cffi typing \
     h5py ipython ipykernel matplotlib scikit-learn pandas pillow
 
+# Install additional packages
 conda activate $INSTALL_DIR
 conda install -y -c conda-forge ipympl
+
+# Install tensorboard
+pip install tensorboard
