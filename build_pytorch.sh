@@ -10,20 +10,11 @@ export CC=cc #gcc
 export CRAYPE_LINK_TYPE=dynamic
 export USE_CUDA=0
 export USE_DISTRIBUTED=1
-export MAX_JOBS=5
-
-# Download PyTorch
-mkdir -p $BUILD_DIR && cd $BUILD_DIR
-[ -d pytorch ] && rm -rf pytorch
-git clone --recursive --branch $PYTORCH_VERSION $PYTORCH_URL
-cd pytorch
 
 # Build PyTorch
+cd $BUILD_DIR/pytorch
 python setup.py install
 
-# Download torchvision
-cd ..
-[ -d vision ] && rm -rf vision
-git clone --branch $VISION_VERSION https://github.com/pytorch/vision.git
-cd vision
+# Install torchvision
+cd $BUILD_DIR/vision
 python setup.py install
