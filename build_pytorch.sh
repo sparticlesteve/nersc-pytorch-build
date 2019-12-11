@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Configure the installation
 source activate.sh
 
