@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Configure the installation
 source ./config.sh

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # This script installs PyTorch geometric and its dependencies
 # https://github.com/rusty1s/pytorch_geometric
