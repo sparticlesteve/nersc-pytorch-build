@@ -63,8 +63,12 @@ def main():
 
     # Random number dataset
     print('Generating a batch of data')
-    batch_size, n_features, n_classes = (32, 32, 10)
-    x = torch.randn((batch_size, n_features)).to(device)
+    batch_size = 32
+    sample_shape = [3, 224, 224]
+    n_classes = 32
+    #batch_size, n_features, n_classes = (32, 32, 10)
+    #x = torch.randn((batch_size, n_features)).to(device)
+    x = torch.randn([batch_size] + sample_shape).to(device)
     y = torch.randint(n_classes, (batch_size,)).to(device)
 
     # Construct a simple model
@@ -76,7 +80,8 @@ def main():
     model = torch.nn.parallel.DistributedDataParallel(
         model, device_ids=[local_rank], output_device=local_rank)
 
-    print(model)
+    if rank == 0:
+        print(model)
 
     # Loss function
     loss_fn = torch.nn.CrossEntropyLoss().to(device)
