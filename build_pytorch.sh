@@ -8,6 +8,8 @@ conda activate $INSTALL_DIR
 export CMAKE_PREFIX_PATH=$INSTALL_DIR
 export PYTORCH_BUILD_VERSION=1.3.1 # to prevent dependency issues
 export PYTORCH_BUILD_NUMBER=1
+export CFLAGS="-g"
+export CXXFLAGS="-g"
 
 # Cori-GPU system build config
 if [[ $SYSTEM_ARCH == "gpu" ]]; then
