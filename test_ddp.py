@@ -2,6 +2,7 @@
 Test of PyTorch DistributedDataParallel for Cori GPU installations
 """
 
+import os
 import argparse
 
 import torch
@@ -11,16 +12,51 @@ import torchvision
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--ranks-per-node', type=int, default=8)
+    parser.add_argument('--backend', default='mpi',
+                        choices=['mpi', 'nccl-file', 'gloo-file'])
     return parser.parse_args()
+
+def init_workers_gloo_file():
+    rank = int(os.environ['SLURM_PROCID'])
+    n_ranks = int(os.environ['SLURM_NTASKS'])
+    sync_file_dir = '%s/tmp' % os.environ['SCRATCH']
+    os.makedirs(sync_file_dir, exist_ok=True)
+    sync_file = 'file://%s/pytorch_sync_%s' % (
+        sync_file_dir, os.environ['SLURM_JOB_ID'])
+    dist.init_process_group(backend='gloo', world_size=n_ranks, rank=rank,
+                            init_method=sync_file)
+    return rank, n_ranks
+
+def init_workers_nccl_file():
+    rank = int(os.environ['SLURM_PROCID'])
+    n_ranks = int(os.environ['SLURM_NTASKS'])
+    sync_file_dir = '%s/tmp' % os.environ['SCRATCH']
+    os.makedirs(sync_file_dir, exist_ok=True)
+    sync_file = 'file://%s/pytorch_sync_%s' % (
+        sync_file_dir, os.environ['SLURM_JOB_ID'])
+    dist.init_process_group(backend='nccl', world_size=n_ranks, rank=rank,
+                            init_method=sync_file)
+    return rank, n_ranks
+
+def init_workers_mpi():
+    dist.init_process_group(backend='mpi')
+    rank = dist.get_rank()
+    n_ranks = dist.get_world_size()
+    return rank, n_ranks
 
 def main():
     args = parse_args()
 
-    # Initialized distributed library
-    dist.init_process_group(backend='mpi')
-    rank, n_ranks = dist.get_rank(), dist.get_world_size()
+    # Initialize distributed library
+    if args.backend == 'mpi':
+        init_func = init_workers_mpi
+    elif args.backend == 'gloo-file':
+        init_func = init_workers_gloo_file
+    else:
+        init_func = init_workers_nccl_file
+    rank, n_ranks = init_func()
     local_rank = rank % args.ranks_per_node
-    print('Initialized rank', rank, 'size', n_ranks)
+    print('Initialized rank', rank, 'local-rank', local_rank, 'size', n_ranks)
 
     torch.cuda.set_device(local_rank)
     device = torch.device('cuda', local_rank)
