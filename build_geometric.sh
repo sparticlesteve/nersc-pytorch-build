@@ -6,7 +6,7 @@
 # Configure the installation
 source ./config.sh
 conda activate $INSTALL_DIR
-echo "Building PyTorch Geometric on $(hostname)"
+echo "Building PyTorch Geometric"
 
 # Install the packages via pip
 pip install requests # fixes an import error

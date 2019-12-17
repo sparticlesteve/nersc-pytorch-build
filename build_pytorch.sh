@@ -35,11 +35,13 @@ else
 fi
 
 # Build PyTorch
+echo "Building PyTorch"
 cd $BUILD_DIR/pytorch
 python setup.py clean
 python setup.py install
 
 # Install torchvision
+echo "Building torchvision"
 cd $BUILD_DIR/vision
 python setup.py clean
 python setup.py install
