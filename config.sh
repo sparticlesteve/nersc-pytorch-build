@@ -26,15 +26,22 @@ fi
 if [[ $SYSTEM_ARCH == "gpu" ]]; then
     module purge
 
-    # Vanilla setup
+    # MPICH setup
     #module load gcc/7.3.0
-    #module load cuda/10.1.243
+    #module load cuda/10.1.168
     #module load mpich/3.3.1-debug
 
     # OpenMPI setup
+    #module load gcc/7.3.0
+    #module load cuda/10.1.168
+    #module load openmpi/4.0.1-ucx-1.6
+
+    # mvapich setup
     module load gcc/7.3.0
     module load cuda/10.1.168
-    module load openmpi/4.0.1-ucx-1.6
+    module load mvapich2/2.3.2
+    export MV2_ENABLE_AFFINITY=0
+    export LD_PRELOAD=$MVAPICH2_DIR/lib/libmpi.so
 
     # Cutting edge mvapich
     #module load gcc/8.2.0
