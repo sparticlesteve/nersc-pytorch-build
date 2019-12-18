@@ -31,11 +31,6 @@ srun -C gpu -N 1 --gres=gpu:8 --exclusive \
     --ntasks-per-node 8 -c 10 -t 5 -u -l \
     python test_ddp.py --backend mpi
 
-# Multi-node NCCL fails
-#srun -C gpu -N 2 --gres=gpu:8 --exclusive \
-#    --ntasks-per-node 8 -c 10 -t 5 -u -l \
-#    python test_ddp.py --backend nccl-file
-
 echo "-------------------------------------------------------------------------"
 echo "DDP Gloo training test"
 srun -C gpu -N 1 --gres=gpu:8 --exclusive \
@@ -47,3 +42,12 @@ echo "DDP Gloo multi-node training test"
 srun -C gpu -N 2 --gres=gpu:8 --exclusive \
     --ntasks-per-node 8 -c 10 -t 5 -u -l \
     python test_ddp.py --backend gloo-file
+
+# Multi-node NCCL fails
+#echo "-------------------------------------------------------------------------"
+#echo "DDP NCCL multi-node training test"
+#export NCCL_DEBUG=INFO
+#export NCCL_DEBUG_SUBSYS=ALL
+#srun -C gpu -N 2 --gres=gpu:8 --exclusive \
+#    --ntasks-per-node 8 -c 10 -t 5 -u -l \
+#    python test_ddp.py --backend nccl-file
