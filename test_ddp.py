@@ -66,15 +66,22 @@ def main():
     batch_size = 32
     sample_shape = [3, 224, 224]
     n_classes = 32
-    #batch_size, n_features, n_classes = (32, 32, 10)
-    #x = torch.randn((batch_size, n_features)).to(device)
     x = torch.randn([batch_size] + sample_shape).to(device)
     y = torch.randint(n_classes, (batch_size,)).to(device)
 
     # Construct a simple model
     print('Constructing model')
-    #model = torch.nn.Linear(n_features, n_classes).to(device)
-    model = torchvision.models.resnet50().to(device)
+
+    # Single-layer CNN
+    hidden_size = 256 # Error if 512
+    model = torch.nn.Sequential(
+        torch.nn.Conv2d(3, hidden_size, kernel_size=3),
+        torch.nn.Conv2d(hidden_size, n_classes, kernel_size=3),
+        torch.nn.AdaptiveAvgPool2d(1),
+        torch.nn.Flatten()).to(device)
+
+    # ResNet50
+    #model = torchvision.models.resnet50(num_classes=n_classes).to(device)
 
     # Wrap model for distributed training
     model = torch.nn.parallel.DistributedDataParallel(

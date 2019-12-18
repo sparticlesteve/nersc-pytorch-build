@@ -35,6 +35,8 @@ if [[ $SYSTEM_ARCH == "gpu" ]]; then
     module load gcc/7.3.0
     module load cuda/10.1.168
     module load openmpi/4.0.1-ucx-1.6
+    export LD_LIBRARY_PATH=$INSTALL_DIR/lib/python3.6/site-packages/torch/lib:$LD_LIBRARY_PATH
+    export UCX_LOG_LEVEL=error
 
     # mvapich setup
     #module load gcc/7.3.0
@@ -42,6 +44,7 @@ if [[ $SYSTEM_ARCH == "gpu" ]]; then
     #module load mvapich2/2.3.2
     #export MV2_ENABLE_AFFINITY=0
     #export LD_PRELOAD=$MVAPICH2_DIR/lib/libmpi.so
+    #export MV2_USE_CUDA=1
 
     # Cutting edge mvapich
     #module load gcc/8.2.0
