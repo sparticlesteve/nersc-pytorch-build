@@ -16,7 +16,7 @@ srun -C gpu -N 1 --gres=gpu:8 --exclusive \
 echo "-------------------------------------------------------------------------"
 echo "Multi node, multi GPU unit tests"
 srun -C gpu -N 2 --gres=gpu:8 --exclusive \
-    --ntasks-per-node 16 -c 10 -t 5 -u -l \
+    --ntasks-per-node 8 -c 10 -t 5 -u -l \
     python test_install.py --all
 
 echo "-------------------------------------------------------------------------"
