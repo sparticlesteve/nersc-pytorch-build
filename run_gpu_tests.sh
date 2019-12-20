@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
 . activate.sh
-module load esslurm
 
 echo "-------------------------------------------------------------------------"
 echo "Single GPU unit tests"

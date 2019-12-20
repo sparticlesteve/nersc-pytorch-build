@@ -25,6 +25,7 @@ fi
 # Setup programming environment
 if [[ $SYSTEM_ARCH == "gpu" ]]; then
     module purge
+    module load esslurm
 
     # MPICH setup
     #module load gcc/7.3.0
