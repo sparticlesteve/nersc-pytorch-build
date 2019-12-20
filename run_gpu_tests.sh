@@ -1,52 +1,32 @@
 #!/bin/bash -e
+#SBATCH -C gpu
+#SBATCH -N 1
+#SBATCH --gres=gpu:8
+#SBATCH --exclusive
+#SBATCH -c 10
+#SBATCH -t 30
+#SBATCH -o slurm-gpu-test-%j.out
 
 . activate.sh
 
 echo "-------------------------------------------------------------------------"
 echo "Single GPU unit tests"
-srun -C gpu -N 1 --gres=gpu:8 -c 10 -t 5 -u python test_install.py --all
+srun -n 1 -u python test_install.py --cuda --vision --geometric
 
 echo "-------------------------------------------------------------------------"
 echo "Multi GPU unit tests"
-srun -C gpu -N 1 --gres=gpu:8 --exclusive \
-    --ntasks-per-node 8 -c 10 -t 5 -u -l \
-    python test_install.py --mpi --cuda
-
-echo "-------------------------------------------------------------------------"
-echo "Multi node, multi GPU unit tests"
-srun -C gpu -N 2 --gres=gpu:8 --exclusive \
-    --ntasks-per-node 8 -c 10 -t 5 -u -l \
-    python test_install.py --mpi --cuda
+srun --ntasks-per-node 8 -u -l python test_install.py --mpi --cuda
 
 echo "-------------------------------------------------------------------------"
 echo "DDP NCCL training test"
-srun -C gpu -N 1 --gres=gpu:8 --exclusive \
-    --ntasks-per-node 8 -c 10 -t 5 -u -l \
-    python test_ddp.py --backend nccl-file
-
-# Multi-node NCCL hangs
-#echo "-------------------------------------------------------------------------"
-#echo "DDP NCCL multi-node training test"
 #export NCCL_DEBUG=INFO
 #export NCCL_DEBUG_SUBSYS=ALL
-#srun -C gpu -N 2 --gres=gpu:8 --exclusive \
-#    --ntasks-per-node 8 -c 10 -t 5 -u -l \
-#    python test_ddp.py --backend nccl-file
+srun --ntasks-per-node 8 -u -l python test_ddp.py --backend nccl-file
 
 echo "-------------------------------------------------------------------------"
 echo "DDP MPI training test"
-srun -C gpu -N 1 --gres=gpu:8 --exclusive \
-    --ntasks-per-node 8 -c 10 -t 5 -u -l \
-    python test_ddp.py --backend mpi
+srun --ntasks-per-node 8 -u -l python test_ddp.py --backend mpi
 
 echo "-------------------------------------------------------------------------"
 echo "DDP Gloo training test"
-srun -C gpu -N 1 --gres=gpu:8 --exclusive \
-    --ntasks-per-node 8 -c 10 -t 5 -u -l \
-    python test_ddp.py --backend gloo-file
-
-echo "-------------------------------------------------------------------------"
-echo "DDP Gloo multi-node training test"
-srun -C gpu -N 2 --gres=gpu:8 --exclusive \
-    --ntasks-per-node 8 -c 10 -t 5 -u -l \
-    python test_ddp.py --backend gloo-file
+srun --ntasks-per-node 8 -u -l python test_ddp.py --backend gloo-file
