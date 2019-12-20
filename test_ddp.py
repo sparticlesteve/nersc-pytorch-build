@@ -72,16 +72,16 @@ def main():
     # Construct a simple model
     print('Constructing model')
 
-    # Single-layer CNN
-    hidden_size = 256 # Error if 512
-    model = torch.nn.Sequential(
-        torch.nn.Conv2d(3, hidden_size, kernel_size=3),
-        torch.nn.Conv2d(hidden_size, n_classes, kernel_size=3),
-        torch.nn.AdaptiveAvgPool2d(1),
-        torch.nn.Flatten()).to(device)
+    # Single-layer CNN works with hidden size 256, fails with 512
+    #hidden_size = 256 # Error if 512
+    #model = torch.nn.Sequential(
+    #    torch.nn.Conv2d(3, hidden_size, kernel_size=3),
+    #    torch.nn.Conv2d(hidden_size, n_classes, kernel_size=3),
+    #    torch.nn.AdaptiveAvgPool2d(1),
+    #    torch.nn.Flatten()).to(device)
 
     # ResNet50
-    #model = torchvision.models.resnet50(num_classes=n_classes).to(device)
+    model = torchvision.models.resnet50(num_classes=n_classes).to(device)
 
     # Wrap model for distributed training
     model = torch.nn.parallel.DistributedDataParallel(
