@@ -2,7 +2,8 @@
 #SBATCH -C haswell
 #SBATCH -N 2
 #SBATCH -q debug
-#SBATCH -t 5
+#SBATCH -t 10
+#SBATCH -o slurm-cpu-test-%j.out
 
 . config.sh
 conda activate $INSTALL_DIR

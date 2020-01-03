@@ -34,7 +34,7 @@ else
     export CRAYPE_LINK_TYPE=dynamic
     export USE_CUDA=0
     export USE_DISTRIBUTED=1
-    #export MAX_JOBS=6
+    export MAX_JOBS=6
     # Disabling test builds because of error
     export BUILD_TEST=0
 fi
