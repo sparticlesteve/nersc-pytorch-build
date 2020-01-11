@@ -17,7 +17,7 @@ if [[ $SYSTEM_ARCH == "gpu" ]]; then
     export CXX=mpic++ #g++
     export CC=mpicc #gcc
     export USE_CUDA=1
-    export USE_SYSTEM_NCCL=1 # no effect?
+    export USE_SYSTEM_NCCL=1
     export NCCL_ROOT_DIR=$NCCL_DIR
     export NCCL_INCLUDE_DIR=$NCCL_DIR/include
     export NCCL_LIBRARIES=$NCCL_DIR/lib
