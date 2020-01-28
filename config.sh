@@ -54,7 +54,7 @@ if [[ $SYSTEM_ARCH == "gpu" ]]; then
     #module load mvapich2/2.3.2
 
 else
-    module load gcc/8.2.0
+    module load gcc/8.3.0
     module unload PrgEnv-intel
     module load PrgEnv-gnu
     module unload craype-hugepages2M
