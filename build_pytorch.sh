@@ -35,6 +35,7 @@ else
     export CC=cc #gcc
     export CRAYPE_LINK_TYPE=dynamic
     export USE_CUDA=0
+    export USE_MKLDNN=1
     export USE_DISTRIBUTED=1
     export MAX_JOBS=6
     # Disabling test builds because of error
