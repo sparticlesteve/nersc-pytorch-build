@@ -6,7 +6,9 @@ source ./config.sh
 # Make a conda env
 conda create -y --prefix $INSTALL_DIR python=$PYTHON_VERSION \
     mkl mkl-include numpy pyyaml setuptools cmake cffi typing \
-    h5py ipython ipykernel matplotlib scikit-learn pandas pillow==6.2.1
+    h5py ipython ipykernel matplotlib scikit-learn pandas pillow
+
+#pillow==6.2.1
 
 # Install additional packages
 conda activate $INSTALL_DIR
