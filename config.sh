@@ -39,6 +39,7 @@ if [[ $SYSTEM_ARCH == "gpu" ]]; then
     module load openmpi/4.0.1-ucx-1.6
     export LD_LIBRARY_PATH=$INSTALL_DIR/lib/python3.6/site-packages/torch/lib:$LD_LIBRARY_PATH
     export UCX_LOG_LEVEL=error
+    export NCCL_IB_HCA=mlx5_0:1,mlx5_2:1,mlx5_4:1,mlx5_6:1
 
     # mvapich setup
     #module load gcc/7.3.0
