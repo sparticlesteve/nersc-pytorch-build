@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Abort on failure
+set -e -o pipefail
+
 ./checkout_packages.sh
 ./build_env.sh 2>&1 | tee log.env
 ./build_pytorch.sh 2>&1 | tee log.pytorch

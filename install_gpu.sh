@@ -1,4 +1,7 @@
-#!/bin/bash -e
+#!/bin/bash
+
+# Abort on failure
+set -e -o pipefail
 
 # Do the full installation for Cori-GPU
 module purge
