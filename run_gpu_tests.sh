@@ -11,7 +11,7 @@
 
 echo "-------------------------------------------------------------------------"
 echo "Single GPU unit tests"
-srun -n 1 -u python test_install.py --cuda --vision --geometric
+srun -N 1 -n 1 -u python test_install.py --cuda --vision --geometric
 
 echo "-------------------------------------------------------------------------"
 echo "Multi GPU unit tests"
