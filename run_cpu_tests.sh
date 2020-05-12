@@ -8,8 +8,13 @@
 . config.sh
 conda activate $INSTALL_DIR
 
-# Basic installation tests
-srun -l -u python test_install.py --mpi --vision --geometric
+# There seems to be a data race in a cache directory creation if
+# some imports from torch-geometric are done in parallel first time.
+# So, I do the import tests first in a single process.
+srun -n 1 -N 1 python test_install.py --vision --geometric
+
+# Parallel tests
+srun -l -u python test_install.py --mpi #--vision --geometric
 
 # Cray plugin training test - not working
 #exampleScript=/opt/cray/pe/craype-dl-plugin-py3/19.06.1/examples/torch_mnist/pytorch_mnist.py
