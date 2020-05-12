@@ -14,4 +14,5 @@ conda install -y -c conda-forge ipympl=0.4.1
 pip install ray tensorboard
 
 # Hide the conda-installed ld, which causes problems
-mv $INSTALL_DIR/compiler_compat/ld $INSTALL_DIR/compiler_compat/backup-ld
+# TODO: still needed?
+#mv $INSTALL_DIR/compiler_compat/ld $INSTALL_DIR/compiler_compat/backup-ld
