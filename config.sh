@@ -10,9 +10,9 @@ fi
 # Configure the installation
 export INSTALL_NAME="pytorch"
 export PYTHON_VERSION=3.7
-export PYTORCH_VERSION="v1.4.0"
+export PYTORCH_VERSION="v1.5.0"
 export PYTORCH_URL=https://github.com/pytorch/pytorch
-export VISION_VERSION="v0.5.0"
+export VISION_VERSION="v0.6.0"
 export SYSTEM_ARCH=cpu
 if [[ $SYSTEM_ARCH == "gpu" ]]; then
     export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/$PYTORCH_VERSION-gpu
@@ -28,11 +28,10 @@ if [[ $SYSTEM_ARCH == "gpu" ]]; then
     module load esslurm
 
     # OpenMPI setup
-    module load gcc/7.3.0
-    module load cuda/10.1.168
-    # Not building currently with system NCCL
-    #module load nccl/2.4.8
-    module load openmpi/4.0.1-ucx-1.6
+    module load gcc/8.3.0
+    module load cuda/10.2.89
+    module load nccl/2.5.6
+    module load openmpi/4.0.3
     export LD_LIBRARY_PATH=$INSTALL_DIR/lib/python3.6/site-packages/torch/lib:$LD_LIBRARY_PATH
     export UCX_LOG_LEVEL=error
     export NCCL_IB_HCA=mlx5_0:1,mlx5_2:1,mlx5_4:1,mlx5_6:1
@@ -55,7 +54,7 @@ else
 fi
 
 # Setup conda
-source /usr/common/software/python/3.7-anaconda-2019.07/etc/profile.d/conda.sh
+source /usr/common/software/python/3.7-anaconda-2019.10/etc/profile.d/conda.sh
 
 # Print some stuff
 echo "Configuring on $(hostname) as $USER for $SYSTEM_ARCH"
