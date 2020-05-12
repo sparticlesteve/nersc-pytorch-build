@@ -11,9 +11,7 @@ conda create -y --prefix $INSTALL_DIR python=$PYTHON_VERSION \
 # Install additional packages
 conda activate $INSTALL_DIR
 conda install -y -c conda-forge ipympl=0.4.1
-
-# Install tensorboard
-pip install tensorboard
+pip install ray tensorboard
 
 # Hide the conda-installed ld, which causes problems
 mv $INSTALL_DIR/compiler_compat/ld $INSTALL_DIR/compiler_compat/backup-ld
