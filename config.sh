@@ -27,11 +27,6 @@ if [[ $SYSTEM_ARCH == "gpu" ]]; then
     module purge
     module load esslurm
 
-    # MPICH setup
-    #module load gcc/7.3.0
-    #module load cuda/10.1.168
-    #module load mpich/3.3.1-debug
-
     # OpenMPI setup
     module load gcc/7.3.0
     module load cuda/10.1.168
@@ -49,11 +44,6 @@ if [[ $SYSTEM_ARCH == "gpu" ]]; then
     #export MV2_ENABLE_AFFINITY=0
     #export LD_PRELOAD=$MVAPICH2_DIR/lib/libmpi.so
     #export MV2_USE_CUDA=1
-
-    # Cutting edge mvapich
-    #module load gcc/8.2.0
-    #module load cuda/10.2.89
-    #module load mvapich2/2.3.2
 
 else
     module load gcc/8.3.0

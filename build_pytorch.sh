@@ -9,8 +9,6 @@ export CMAKE_PREFIX_PATH=$INSTALL_DIR
 export PYTORCH_BUILD_VERSION=${PYTORCH_VERSION:1} # to prevent dependency issues
 export PYTORCH_BUILD_NUMBER=1
 export REL_WITH_DEB_INFO=1
-#export CFLAGS="-g"
-#export CXXFLAGS="-g"
 
 # Cori-GPU system build config
 if [[ $SYSTEM_ARCH == "gpu" ]]; then
