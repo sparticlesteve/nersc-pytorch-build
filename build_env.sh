@@ -10,7 +10,7 @@ conda create -y --prefix $INSTALL_DIR python=$PYTHON_VERSION \
 
 # Install additional packages
 conda activate $INSTALL_DIR
-conda install -y -c conda-forge ipympl
+conda install -y -c conda-forge ipympl=0.4.1
 
 # Install tensorboard
 pip install tensorboard
