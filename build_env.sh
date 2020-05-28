@@ -13,6 +13,10 @@ conda activate $INSTALL_DIR
 conda install -y -c conda-forge ipympl=0.4.1
 pip install ray tensorboard
 
+# Install NERSC tensorboard helper
+git clone https://github.com/NERSC/nersc-tensorboard-helper.git \
+    $INSTALL_DIR/lib/python${PYTHON_VERSION}/site-packages/nersc-tensorboard-helper
+
 # Hide the conda-installed ld, which causes problems
 # TODO: still needed?
 #mv $INSTALL_DIR/compiler_compat/ld $INSTALL_DIR/compiler_compat/backup-ld
