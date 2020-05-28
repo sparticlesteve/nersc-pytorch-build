@@ -17,6 +17,7 @@ pip install ray tensorboard
 git clone https://github.com/NERSC/nersc-tensorboard-helper.git \
     $INSTALL_DIR/lib/python${PYTHON_VERSION}/site-packages/nersc-tensorboard-helper
 
-# Hide the conda-installed ld, which causes problems
-# TODO: still needed?
-#mv $INSTALL_DIR/compiler_compat/ld $INSTALL_DIR/compiler_compat/backup-ld
+# Install convenient gpustat command
+if [[ $SYSTEM_ARCH == "gpu" ]]; then
+    pip install gpustat
+fi
