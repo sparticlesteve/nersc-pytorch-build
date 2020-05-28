@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 . config.sh
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
