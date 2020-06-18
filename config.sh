@@ -10,7 +10,7 @@ fi
 # Configure the installation
 export INSTALL_NAME="pytorch"
 export PYTHON_VERSION=3.7
-export PYTORCH_VERSION="v1.5.0"
+export PYTORCH_VERSION="v1.5.1"
 export PYTORCH_URL=https://github.com/pytorch/pytorch
 export VISION_VERSION="v0.6.0"
 export SYSTEM_ARCH=cpu
