@@ -31,3 +31,7 @@ srun --ntasks-per-node 8 -u -l python test_ddp.py --backend nccl-file
 echo "-------------------------------------------------------------------------"
 echo "DDP Gloo training test"
 srun --ntasks-per-node 8 -u -l python test_ddp.py --backend gloo-file
+
+echo "-------------------------------------------------------------------------"
+echo "PyTorch Geometric training test"
+srun -n 1 -u python test_gcn.py
