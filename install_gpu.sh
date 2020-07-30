@@ -20,3 +20,6 @@ srun -C gpu -N 1 --gres=gpu:1 -c 40 -t 4:00:00 \
 # Build pytorch geometric
 srun -C gpu -N 1 --gres=gpu:1 -c 40 -t 4:00:00 \
     ./build_geometric.sh 2>&1 | tee log.geometric
+
+# Build mpi4py
+./build_mpi4py.sh 2>&1 | tee log.mpi4py

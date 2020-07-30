@@ -24,6 +24,10 @@ echo "DDP MPI training test"
 srun -l -u python test_ddp.py --backend mpi
 
 echo "-------------------------------------------------------------------------"
+echo "MPI4Py test"
+srun -l -u python -m mpi4py.bench helloworld
+
+echo "-------------------------------------------------------------------------"
 echo "Single node PyTorch Geometric training test"
 srun -N 1 -n 1 -u python test_gcn.py
 
