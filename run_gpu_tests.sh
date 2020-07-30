@@ -21,16 +21,16 @@ echo "-------------------------------------------------------------------------"
 echo "DDP NCCL training test"
 #export NCCL_DEBUG=INFO
 #export NCCL_DEBUG_SUBSYS=ALL
-srun --ntasks-per-node 8 -u -l python test_ddp.py --backend nccl-file
+srun --ntasks-per-node 8 -u -l python test_ddp.py --backend nccl-file --gpu
 
 # Disabling failing MPI test
 #echo "-------------------------------------------------------------------------"
 #echo "DDP MPI training test"
-#srun --ntasks-per-node 8 -u -l python test_ddp.py --backend mpi
+#srun --ntasks-per-node 8 -u -l python test_ddp.py --backend mpi --gpu
 
 echo "-------------------------------------------------------------------------"
 echo "DDP Gloo training test"
-srun --ntasks-per-node 8 -u -l python test_ddp.py --backend gloo-file
+srun --ntasks-per-node 8 -u -l python test_ddp.py --backend gloo-file --gpu
 
 echo "-------------------------------------------------------------------------"
 echo "PyTorch Geometric training test"
