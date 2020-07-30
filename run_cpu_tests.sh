@@ -13,7 +13,7 @@ echo "Single node unit tests"
 # There seems to be a data race in a cache directory creation if
 # some imports from torch-geometric are done in parallel first time.
 # So, I do the import tests first in a single process.
-srun -n 1 -N 1 -u python test_install.py --vision --geometric
+srun -N 1 -n 1 -u python test_install.py --vision --geometric
 
 echo "-------------------------------------------------------------------------"
 echo "Multi node unit tests"
@@ -25,7 +25,7 @@ srun -l -u python test_ddp.py --backend mpi
 
 echo "-------------------------------------------------------------------------"
 echo "Single node PyTorch Geometric training test"
-srun -n 1 -u python test_gcn.py
+srun -N 1 -n 1 -u python test_gcn.py
 
 # Cray plugin training test - not working
 #exampleScript=/opt/cray/pe/craype-dl-plugin-py3/19.06.1/examples/torch_mnist/pytorch_mnist.py
