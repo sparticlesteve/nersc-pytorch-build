@@ -50,4 +50,6 @@ python setup.py install
 echo "Building torchvision"
 cd $BUILD_DIR/vision
 python setup.py clean
-python setup.py install
+# Cray compiler wrappers fail the validity checks in torch extensions,
+# so here we just explicitly use the bare gnu compiler commands.
+CXX=g++ CC=gcc python setup.py install
