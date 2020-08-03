@@ -7,6 +7,7 @@ import argparse
 
 import torch
 import torch.distributed as dist
+from torch.nn.parallel import DistributedDataParallel
 import torchvision
 
 def parse_args():
@@ -14,6 +15,7 @@ def parse_args():
     parser.add_argument('--ranks-per-node', type=int, default=8)
     parser.add_argument('--backend', default='mpi',
                         choices=['mpi', 'nccl-file', 'gloo-file'])
+    parser.add_argument('--gpu', action='store_true', help='Use GPUs')
     return parser.parse_args()
 
 def init_workers_gloo_file():
@@ -58,8 +60,11 @@ def main():
     local_rank = rank % args.ranks_per_node
     print('Initialized rank', rank, 'local-rank', local_rank, 'size', n_ranks)
 
-    torch.cuda.set_device(local_rank)
-    device = torch.device('cuda', local_rank)
+    if args.gpu:
+        torch.cuda.set_device(local_rank)
+        device = torch.device('cuda', local_rank)
+    else:
+        device = torch.device('cpu')
 
     # Random number dataset
     print('Generating a batch of data')
@@ -84,8 +89,8 @@ def main():
     model = torchvision.models.resnet50(num_classes=n_classes).to(device)
 
     # Wrap model for distributed training
-    model = torch.nn.parallel.DistributedDataParallel(
-        model, device_ids=[local_rank], output_device=local_rank)
+    device_ids = [device] if args.gpu else None
+    model = DistributedDataParallel(model, device_ids=device_ids)
 
     if rank == 0:
         print(model)

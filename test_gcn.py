@@ -10,6 +10,10 @@ from torch_geometric.datasets import Reddit
 from torch_geometric.data import ClusterData, ClusterLoader, NeighborSampler
 from torch_geometric.nn import SAGEConv
 
+# Some configuration
+n_data_workers = 4
+do_eval = True
+
 print('Preparing dataset')
 dataset = Reddit('../data/Reddit')
 data = dataset[0]
@@ -17,12 +21,10 @@ data = dataset[0]
 cluster_data = ClusterData(data, num_parts=1500, recursive=False,
                            save_dir=dataset.processed_dir)
 train_loader = ClusterLoader(cluster_data, batch_size=20, shuffle=True,
-                             num_workers=12)
+                             num_workers=n_data_workers)
 
 subgraph_loader = NeighborSampler(data.edge_index, sizes=[-1], batch_size=1024,
-                                  shuffle=False, num_workers=12)
-print('...done')
-
+                                  shuffle=False, num_workers=n_data_workers)
 
 class Net(torch.nn.Module):
     def __init__(self, in_channels, out_channels):
@@ -70,8 +72,6 @@ print('Building model')
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = Net(dataset.num_features, dataset.num_classes).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.005)
-print('...done')
-
 
 def train():
     model.train()
@@ -108,6 +108,9 @@ def test():  # Inference should be performed on the full graph.
 
 print('Training one epoch')
 loss = train()
-train_acc, val_acc, test_acc = test()
-print(f'Epoch: 0, Loss: {loss:.4f}, Train: {train_acc:.4f}, '
-      f'Val: {val_acc:.4f}, test: {test_acc:.4f}')
+if do_eval:
+    print('Evaluating model')
+    train_acc, val_acc, test_acc = test()
+    print(f'Epoch: 0, Loss: {loss:.4f}, Train: {train_acc:.4f}, '
+          f'Val: {val_acc:.4f}, test: {test_acc:.4f}')
+print('All done')
