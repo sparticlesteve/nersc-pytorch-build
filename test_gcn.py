@@ -2,6 +2,8 @@
 https://github.com/rusty1s/pytorch_geometric/blob/master/examples/cluster_gcn_reddit.py
 """
 
+import os
+
 import torch
 import torch.nn.functional as F
 from torch.nn import ModuleList
@@ -13,9 +15,10 @@ from torch_geometric.nn import SAGEConv
 # Some configuration
 n_data_workers = 4
 do_eval = True
+data_dir = os.path.expandvars('$SCRATCH/pytorch-build/data/Reddit')
 
 print('Preparing dataset')
-dataset = Reddit('../data/Reddit')
+dataset = Reddit(data_dir)
 data = dataset[0]
 
 cluster_data = ClusterData(data, num_parts=1500, recursive=False,
