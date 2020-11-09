@@ -11,11 +11,11 @@
 
 echo "-------------------------------------------------------------------------"
 echo "Single GPU unit tests"
-srun -N 1 -n 1 -u python test_install.py --cuda --vision --geometric
+srun -N 1 -n 1 -u python test_install.py --cuda --vision #--geometric
 
-echo "-------------------------------------------------------------------------"
-echo "Multi GPU unit tests"
-srun --ntasks-per-node 8 -u -l python test_install.py --mpi --cuda
+#echo "-------------------------------------------------------------------------"
+#echo "Multi GPU unit tests"
+#srun --ntasks-per-node 8 -u -l python test_install.py --mpi --cuda
 
 echo "-------------------------------------------------------------------------"
 echo "DDP NCCL training test"
@@ -32,10 +32,10 @@ echo "-------------------------------------------------------------------------"
 echo "DDP Gloo training test"
 srun --ntasks-per-node 8 -u -l python test_ddp.py --backend gloo-file --gpu
 
-echo "-------------------------------------------------------------------------"
-echo "PyTorch Geometric training test"
-srun -n 1 -u python test_gcn.py
-
-echo "-------------------------------------------------------------------------"
-echo "MPI4Py test"
-srun -l -u python -m mpi4py.bench helloworld
+#echo "-------------------------------------------------------------------------"
+#echo "PyTorch Geometric training test"
+#srun -n 1 -u python test_gcn.py
+#
+#echo "-------------------------------------------------------------------------"
+#echo "MPI4Py test"
+#srun -l -u python -m mpi4py.bench helloworld
