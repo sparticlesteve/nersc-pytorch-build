@@ -25,7 +25,7 @@ fi
 # Setup programming environment
 if [[ $SYSTEM_ARCH == "gpu" ]]; then
     module purge
-    module load esslurm
+    module load cgpu
 
     # OpenMPI setup
     module load gcc/8.3.0
