@@ -30,7 +30,7 @@ if [[ $SYSTEM_ARCH == "gpu" ]]; then
     # OpenMPI setup
     module load gcc/8.3.0
     module load cuda/10.2.89
-    module load nccl/2.5.6
+    #module load nccl/2.5.6
     module load openmpi/4.0.3
     export LD_LIBRARY_PATH=$INSTALL_DIR/lib/python3.7/site-packages/torch/lib:$LD_LIBRARY_PATH
     export UCX_LOG_LEVEL=error
