@@ -2,7 +2,7 @@
 #SBATCH -C haswell
 #SBATCH -N 2
 #SBATCH -q debug
-#SBATCH -t 10
+#SBATCH -t 30
 #SBATCH -o slurm-cpu-test-%j.out
 
 . config.sh
