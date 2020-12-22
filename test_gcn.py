@@ -45,8 +45,8 @@ class Net(torch.nn.Module):
         return F.log_softmax(x, dim=-1)
 
     def inference(self, x_all):
-        pbar = tqdm(total=x_all.size(0) * len(self.convs))
-        pbar.set_description('Evaluating')
+        #pbar = tqdm(total=x_all.size(0) * len(self.convs))
+        #pbar.set_description('Evaluating')
 
         # Compute representations of nodes layer by layer, using *all*
         # available edges. This leads to faster computation in contrast to
@@ -62,11 +62,11 @@ class Net(torch.nn.Module):
                     x = F.relu(x)
                 xs.append(x.cpu())
 
-                pbar.update(batch_size)
+                #pbar.update(batch_size)
 
             x_all = torch.cat(xs, dim=0)
 
-        pbar.close()
+        #pbar.close()
 
         return x_all
 
