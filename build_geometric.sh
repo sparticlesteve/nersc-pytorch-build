@@ -14,6 +14,8 @@ echo "Building PyTorch Geometric"
 cd $BUILD_DIR
 METIS=metis-5.1.0
 export WITH_METIS=1
+export CXX=g++
+export CC=gcc
 wget -nv http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/${METIS}.tar.gz
 tar -xvzf ${METIS}.tar.gz
 cd ${METIS} || exit
