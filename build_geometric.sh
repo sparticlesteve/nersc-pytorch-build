@@ -14,14 +14,12 @@ echo "Building PyTorch Geometric"
 cd $BUILD_DIR
 METIS=metis-5.1.0
 export WITH_METIS=1
-export CXX=g++
-export CC=gcc
 wget -nv http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/${METIS}.tar.gz
 tar -xvzf ${METIS}.tar.gz
 cd ${METIS} || exit
 sed -i.bak -e 's/IDXTYPEWIDTH 32/IDXTYPEWIDTH 64/g' include/metis.h
-make config prefix=$INSTALL_DIR
-make
+make config prefix=$INSTALL_DIR cc=gcc
+nice make -j
 make install
 
 # Build and install the packages via pip
