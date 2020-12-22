@@ -1,7 +1,7 @@
 #!/bin/bash -e
 #SBATCH -C gpu
 #SBATCH -N 1
-#SBATCH --gres=gpu:8
+#SBATCH -G 8
 #SBATCH --exclusive
 #SBATCH -c 10
 #SBATCH -t 30
