@@ -32,10 +32,10 @@ echo "-------------------------------------------------------------------------"
 echo "DDP Gloo training test"
 srun --ntasks-per-node 8 -u -l python test_ddp.py --backend gloo-file --gpu
 
-#echo "-------------------------------------------------------------------------"
-#echo "PyTorch Geometric training test"
-#srun -n 1 -u python test_gcn.py
-#
+echo "-------------------------------------------------------------------------"
+echo "PyTorch Geometric training test"
+srun -n 1 -u python test_gcn.py
+
 #echo "-------------------------------------------------------------------------"
 #echo "MPI4Py test"
 #srun -l -u python -m mpi4py.bench helloworld

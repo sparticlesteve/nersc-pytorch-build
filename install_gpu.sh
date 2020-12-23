@@ -16,6 +16,9 @@ module load cgpu
 # Install pytorch on a gpu node
 srun -C gpu -N 1 -G 1 -c 10 -t 10 ./install_pytorch.sh 2>&1 | tee log.pytorch
 
+# Install pytorch-geometric on a gpu node
+srun -C gpu -N 1 -G 1 -c 10 -t 10 ./install_geometric.sh 2>&1 | tee log.geometric
+
 # Build pytorch on a GPU node
 #srun -C gpu -N 1 --gres=gpu:1 -c 40 -t 4:00:00 \
 #    ./build_pytorch.sh 2>&1 | tee log.pytorch
