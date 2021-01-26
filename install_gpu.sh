@@ -17,6 +17,10 @@ module load cgpu
 srun -C gpu -N 1 -G 1 -c 20 -t 4:00:00 \
     ./build_pytorch.sh 2>&1 | tee log.pytorch
 
+# Build Apex
+srun -C gpu -N 1 -G 1 -c 20 -t 30 \
+    ./build_apex.sh 2>&1 | tee log.apex
+
 # Build pytorch geometric
 srun -C gpu -N 1 -G 1 -c 20 -t 4:00:00 \
     ./build_geometric.sh 2>&1 | tee log.geometric
