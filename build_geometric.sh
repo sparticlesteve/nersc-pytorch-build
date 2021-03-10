@@ -29,3 +29,9 @@ pip install --verbose --no-cache-dir torch-scatter
 pip install --verbose --no-cache-dir torch-sparse
 pip install --verbose --no-cache-dir torch-cluster
 pip install --verbose torch-geometric
+
+# Install master versions directly from github (sometimes needed)
+#pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_scatter.git
+#pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_sparse.git
+#pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_cluster.git
+#pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_geometric.git
