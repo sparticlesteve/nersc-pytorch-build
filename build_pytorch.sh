@@ -16,11 +16,7 @@ if [[ $SYSTEM_ARCH == "gpu" ]]; then
     export CXX=mpic++ #g++
     export CC=mpicc #gcc
     export USE_CUDA=1
-    # Using system NCCL
-    #export USE_SYSTEM_NCCL=1
-    #export NCCL_ROOT=$NCCL_DIR
-    #export NCCL_INCLUDE_DIR=$NCCL_DIR/include
-    #export NCCL_LIB_DIR=$NCCL_DIR/lib
+    export CUDNN_ROOT=$CUDNN_DIR
     export USE_DISTRIBUTED=1
     # Build for V100 GPU only; maybe not needed when GPU is visible
     # discuss.pytorch.org/t/pytorch-1-2-0-build-fails-on-error-identifier-ldg-is-undefined/52409
