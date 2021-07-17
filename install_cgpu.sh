@@ -1,4 +1,7 @@
 #!/bin/bash
+#SBATCH -C gpu
+#SBATCH -N 1 -n 1 -G 1 -c 20 -t 4:00:00
+#SBATCH -o slurm-build-cgpu-%j.out
 
 # Abort on failure
 set -e -o pipefail
@@ -10,17 +13,8 @@ source config_cgpu.sh $@
 ./build_env.sh 2>&1 | tee log.env
 conda activate $INSTALL_DIR
 
-# Build pytorch on a GPU node
-srun -C gpu -N 1 -G 1 -c 20 -t 4:00:00 \
-    ./build_pytorch.sh 2>&1 | tee log.pytorch
-
-# Build Apex
-srun -C gpu -N 1 -G 1 -c 20 -t 30 \
-    ./build_apex.sh 2>&1 | tee log.apex
-
-# Build pytorch geometric
-srun -C gpu -N 1 -G 1 -c 20 -t 4:00:00 \
-    ./build_geometric.sh 2>&1 | tee log.geometric
-
-# Build mpi4py
+# Build PyTorch and the rest
+./build_pytorch.sh 2>&1 | tee log.pytorch
+./build_apex.sh 2>&1 | tee log.apex
+./build_geometric.sh 2>&1 | tee log.geometric
 ./build_mpi4py.sh 2>&1 | tee log.mpi4py
