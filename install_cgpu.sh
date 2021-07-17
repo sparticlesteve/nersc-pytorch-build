@@ -10,9 +10,6 @@ source config_cgpu.sh $@
 ./build_env.sh 2>&1 | tee log.env
 conda activate $INSTALL_DIR
 
-# Checkout software packages
-./checkout_packages.sh 2>&1 | tee log.checkout
-
 # Build pytorch on a GPU node
 srun -C gpu -N 1 -G 1 -c 20 -t 4:00:00 \
     ./build_pytorch.sh 2>&1 | tee log.pytorch

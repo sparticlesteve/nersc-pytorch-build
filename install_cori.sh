@@ -6,7 +6,6 @@ set -e -o pipefail
 # Do the full installation for Cori CPU
 source config_cori.sh $@
 
-./checkout_packages.sh
 ./build_env.sh 2>&1 | tee log.env
 conda activate $INSTALL_DIR
 
