@@ -10,9 +10,9 @@ fi
 # Configure the installation
 export INSTALL_NAME="pytorch"
 export PYTHON_VERSION=3.8
-export PYTORCH_VERSION="1.8.0"
+export PYTORCH_VERSION="1.9.0"
 export PYTORCH_URL=https://github.com/pytorch/pytorch
-export VISION_VERSION="0.9.0"
+export VISION_VERSION="0.10.0"
 export SYSTEM_ARCH=gpu
 if [[ $SYSTEM_ARCH == "gpu" ]]; then
     export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/$PYTORCH_VERSION-gpu
