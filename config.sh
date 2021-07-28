@@ -33,7 +33,7 @@ if [[ $SYSTEM_ARCH == "gpu" ]]; then
     module load cudnn/8.0.5
     #module load nccl/2.5.6
     module load openmpi/4.0.3
-    export LD_LIBRARY_PATH=$INSTALL_DIR/lib/python3.8/site-packages/torch/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$INSTALL_DIR/lib/python${PYTHON_VERSION}/site-packages/torch/lib:$LD_LIBRARY_PATH
     export UCX_LOG_LEVEL=error
     export NCCL_IB_HCA=mlx5_0:1,mlx5_2:1,mlx5_4:1,mlx5_6:1
 
