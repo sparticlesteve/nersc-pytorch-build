@@ -11,13 +11,5 @@ conda create -y --prefix $INSTALL_DIR python=$PYTHON_VERSION pip \
 # Install additional packages
 conda activate $INSTALL_DIR
 conda install -y -c conda-forge ipympl=0.7.0
-pip install ray tensorboard tqdm wandb ruamel.yaml
-
-# Install NERSC tensorboard helper
-git clone https://github.com/NERSC/nersc-tensorboard-helper.git \
-    $INSTALL_DIR/lib/python${PYTHON_VERSION}/site-packages/nersc-tensorboard-helper
-
-# Install convenient gpustat command
-if [[ $SYSTEM_ARCH == "gpu" ]]; then
-    pip install gpustat
-fi
+pip install --no-cache-dir ray tensorboard tqdm wandb ruamel.yaml gpustat \
+    git+https://github.com/NERSC/nersc-tensorboard-helper.git
