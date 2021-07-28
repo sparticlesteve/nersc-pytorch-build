@@ -10,7 +10,7 @@ conda create -y --prefix $INSTALL_DIR python=$PYTHON_VERSION pip \
 
 # Install additional packages
 conda activate $INSTALL_DIR
-conda install -y -c conda-forge ipympl=0.5.8
+conda install -y -c conda-forge ipympl=0.7.0
 pip install ray tensorboard tqdm wandb ruamel.yaml
 
 # Install NERSC tensorboard helper
