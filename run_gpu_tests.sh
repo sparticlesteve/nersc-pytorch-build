@@ -7,7 +7,8 @@
 #SBATCH -t 30
 #SBATCH -o slurm-gpu-test-%j.out
 
-. activate.sh
+. config.sh
+conda activate $INSTALL_DIR
 
 echo "-------------------------------------------------------------------------"
 echo "Single GPU unit tests"
