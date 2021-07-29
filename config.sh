@@ -57,6 +57,7 @@ fi
 
 # Setup conda
 source /usr/common/software/python/3.8-anaconda-2020.11/etc/profile.d/conda.sh
+export -f conda
 
 # Print some stuff
 echo "Configuring on $(hostname) as $USER for $SYSTEM_ARCH"
