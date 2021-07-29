@@ -3,9 +3,6 @@
 # This script installs PyTorch geometric and its dependencies
 # https://github.com/rusty1s/pytorch_geometric
 
-# Configure the installation
-source ./config.sh
-conda activate $INSTALL_DIR
 echo "Building PyTorch Geometric"
 
 # Build METIS from source

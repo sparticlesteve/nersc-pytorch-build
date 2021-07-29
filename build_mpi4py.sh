@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Setup environment
-. config.sh
-conda activate $INSTALL_DIR
-
 # Download and extract the software
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
 wget https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.3.tar.gz

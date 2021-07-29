@@ -1,9 +1,5 @@
 #!/bin/bash -e
 
-# Setup the environment
-source config.sh
-conda activate $INSTALL_DIR
-
 # Basic build config
 export CMAKE_PREFIX_PATH=$INSTALL_DIR
 export PYTORCH_BUILD_VERSION=$PYTORCH_VERSION # to prevent dependency issues
