@@ -1,8 +1,5 @@
 #!/bin/bash -e
 
-# Configure the installation
-source ./config.sh
-
 # Make a conda env
 mamba create -y --prefix $INSTALL_DIR python=$PYTHON_VERSION pip \
     ninja mkl mkl-include numpy pyyaml setuptools cmake cffi typing \

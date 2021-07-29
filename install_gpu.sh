@@ -7,8 +7,12 @@ set -e -o pipefail
 module purge
 module load cgpu
 
+# Configuration
+. config.sh
+
 # Build the conda environment
 ./build_env.sh 2>&1 | tee log.env
+conda activate $INSTALL_DIR
 
 # Install PyTorch binaries
 ./install_pytorch.sh 2>&1 | tee log.pytorch

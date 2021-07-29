@@ -8,9 +8,6 @@
 #   /opt/cray/pe/craype-dl-plugin-py3/20.06.1/wheel/README
 #
 
-# Setup our installation
-source activate.sh
-
 # Load the cray plugin module
 module load craype-dl-plugin-py3/20.06.1
 
