@@ -2,64 +2,32 @@
 
 if [ $USER == "swowner" ]; then
     umask 002 # all-readable
-    INSTALL_BASE=/usr/common/software
+    INSTALL_BASE=/global/common/software/nersc/shasta2105
 else
     INSTALL_BASE=$SCRATCH/conda
 fi
 
 # Configure the installation
+export CPATH=""
 export INSTALL_NAME="pytorch"
 export PYTHON_VERSION=3.8
 export PYTORCH_VERSION="1.9.0"
 export PYTORCH_URL=https://github.com/pytorch/pytorch
 export VISION_VERSION="0.10.0"
-export SYSTEM_ARCH=gpu # change to cpu for cori haswell, knl
-
-if [[ $SYSTEM_ARCH == "gpu" ]]; then
-    export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/$PYTORCH_VERSION-gpu
-    export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION-gpu
-else
-    export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/$PYTORCH_VERSION
-    export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
-fi
+export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/$PYTORCH_VERSION
+export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 
 # Setup programming environment
-if [[ $SYSTEM_ARCH == "gpu" ]]; then
-    module purge
-    module load cgpu
-
-    # OpenMPI setup
-    module load gcc/8.3.0
-    module load cuda/11.1.1
-    module load cudnn/8.0.5
-    #module load nccl/2.5.6
-    module load openmpi/4.0.3
-    export LD_LIBRARY_PATH=$INSTALL_DIR/lib/python${PYTHON_VERSION}/site-packages/torch/lib:$LD_LIBRARY_PATH
-    export UCX_LOG_LEVEL=error
-    export NCCL_IB_HCA=mlx5_0:1,mlx5_2:1,mlx5_4:1,mlx5_6:1
-
-    # mvapich setup
-    #module load gcc/7.3.0
-    #module load cuda/10.1.168
-    #module load mvapich2/2.3.2
-    #export MV2_ENABLE_AFFINITY=0
-    #export LD_PRELOAD=$MVAPICH2_DIR/lib/libmpi.so
-    #export MV2_USE_CUDA=1
-
-else
-    module load gcc/8.3.0
-    module unload PrgEnv-intel
-    module load PrgEnv-gnu
-    module unload craype-hugepages2M
-    module unload cray-libsci
-    module unload atp
-fi
+module load PrgEnv-gnu
+module load cudatoolkit/20.9_11.0 craype-accel-nvidia80
+module load nccl/2.9.8
+# For CUDA 11.1
+#module load nvidia-nersc/20.11
 
 # Setup conda
-export CONDA_INIT_SCRIPT=/usr/common/software/python/3.8-anaconda-2020.11/etc/profile.d/conda.sh
-source $CONDA_INIT_SCRIPT
+source /global/common/software/nersc/cos1.3/python/3.8-anaconda-2020.11/etc/profile.d/conda.sh
 
 # Print some stuff
-echo "Configuring on $(hostname) as $USER for $SYSTEM_ARCH"
+echo "Configuring on $(hostname) as $USER"
 echo "  Build directory $BUILD_DIR"
 echo "  Install directory $INSTALL_DIR"
