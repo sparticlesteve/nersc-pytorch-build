@@ -2,9 +2,9 @@
 
 # Make a conda env
 mamba create -y --prefix $INSTALL_DIR python=$PYTHON_VERSION pip \
-    ninja mkl mkl-include numpy pyyaml setuptools cmake cffi typing \
-    h5py ipython ipykernel matplotlib scikit-learn pandas pillow pytables \
-    ipympl=0.7.0
+    astunparse numpy ninja pyyaml mkl mkl-include setuptools cmake cffi \
+    typing_extensions future six requests dataclasses h5py ipython ipykernel \
+    matplotlib scikit-learn pandas pillow pytables ipympl=0.7.0
 
 # Install additional packages
 source $CONDA_INIT_SCRIPT
