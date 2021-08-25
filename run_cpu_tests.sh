@@ -1,15 +1,23 @@
-#!/bin/bash
+#!/bin/bash -e
 #SBATCH -C haswell
 #SBATCH -N 2
 #SBATCH -q debug
 #SBATCH -t 30
 #SBATCH -o slurm-cpu-test-%j.out
 
+# Clone the testing repository
+[ -d nersc-pytorch-testing ] || git clone https://github.com/sparticlesteve/nersc-pytorch-testing.git
+
+# Setup software
 . config.sh
 conda activate $INSTALL_DIR
 
+# Run tests
+cd nersc-pytorch-testing
+
 echo "-------------------------------------------------------------------------"
 echo "Single node unit tests"
+srun -N 1 -n 1 -u python pytorch_info.py
 # There seems to be a data race in a cache directory creation if
 # some imports from torch-geometric are done in parallel first time.
 # So, I do the import tests first in a single process.
