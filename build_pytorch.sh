@@ -1,15 +1,14 @@
 #!/bin/bash -e
 
 # Basic build config
-export CMAKE_PREFIX_PATH=$INSTALL_DIR
+export CMAKE_PREFIX_PATH=$INSTALL_DIR:$CMAKE_PREFIX_PATH
 export PYTORCH_BUILD_VERSION=$PYTORCH_VERSION # to prevent dependency issues
 export PYTORCH_BUILD_NUMBER=1
 export REL_WITH_DEB_INFO=1
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
 
-export CXX=CC #g++
-export CC=cc #gcc
-export CRAYPE_LINK_TYPE=dynamic
+#export CXX=CC #g++
+#export CC=cc #gcc
 export USE_CUDA=1
 export USE_DISTRIBUTED=1
 export TORCH_CUDA_ARCH_LIST=8.0
@@ -34,6 +33,7 @@ echo "Building PyTorch"
 git clone --recursive --branch v${PYTORCH_VERSION} $PYTORCH_URL
 cd $BUILD_DIR/pytorch
 python setup.py install
+cd ..
 
 # Install torchvision
 echo "Building torchvision"

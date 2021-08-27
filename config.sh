@@ -18,11 +18,13 @@ export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/$PYTORCH_VERSION
 export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 
 # Setup programming environment
-module load PrgEnv-gnu
+module load PrgEnv-gnu gcc/9.3.0
 module load cudatoolkit/20.9_11.0 craype-accel-nvidia80
 module load nccl/2.9.8
 # For CUDA 11.1
 #module load nvidia-nersc/20.11
+export CXX=CC #g++
+export CC=cc #gcc
 
 # Setup conda
 export CONDA_INIT_SCRIPT=/global/common/software/nersc/cos1.3/python/3.8-anaconda-2020.11/etc/profile.d/conda.sh
@@ -32,3 +34,4 @@ source $CONDA_INIT_SCRIPT
 echo "Configuring on $(hostname) as $USER"
 echo "  Build directory $BUILD_DIR"
 echo "  Install directory $INSTALL_DIR"
+module list

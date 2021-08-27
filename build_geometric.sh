@@ -5,10 +5,19 @@
 
 echo "Building PyTorch Geometric"
 
+# Drop the cray compiler wrappers, they aren't currently working here.
+export CXX=g++
+export CC=gcc
+# Add sdk math_libs include path to find headers like cusparse.h
+export CPATH=/opt/nvidia/hpc_sdk/Linux_x86_64/20.9/math_libs/11.0/include:$CPATH
+# Add lib paths to LIBRARY_PATH so linker can find them
+export LIBRARY_PATH=$LD_LIBRARY_PATH
+cd $BUILD_DIR
+
+
 # Build METIS from source
 # Mostly taken from here:
 # https://github.com/rusty1s/pytorch_sparse/blob/master/script/metis.sh
-cd $BUILD_DIR
 METIS=metis-5.1.0
 export WITH_METIS=1
 wget -nv http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/${METIS}.tar.gz
@@ -21,7 +30,7 @@ make install
 
 # Build and install the packages via pip
 export CPPFLAGS="-I${INSTALL_DIR}/include"
-pip install requests # fixes an import error, do I still need this?
+#pip install requests # fixes an import error, do I still need this?
 pip install --verbose --no-cache-dir torch-scatter
 pip install --verbose --no-cache-dir torch-sparse
 pip install --verbose --no-cache-dir torch-cluster
