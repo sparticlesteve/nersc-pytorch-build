@@ -40,7 +40,8 @@ export NCCL_IB_HCA=mlx5_0:1,mlx5_2:1,mlx5_4:1,mlx5_6:1
 #export MV2_USE_CUDA=1
 
 # Setup conda
-source /usr/common/software/python/3.8-anaconda-2020.11/etc/profile.d/conda.sh
+export CONDA_INIT_SCRIPT=/usr/common/software/python/3.8-anaconda-2020.11/etc/profile.d/conda.sh
+source $CONDA_INIT_SCRIPT
 
 # Print some stuff
 echo "Configuring on $(hostname) as $USER for $SYSTEM_ARCH"

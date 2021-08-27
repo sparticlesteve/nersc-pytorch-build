@@ -26,7 +26,8 @@ module unload cray-libsci
 module unload atp
 
 # Setup conda
-source /usr/common/software/python/3.8-anaconda-2020.11/etc/profile.d/conda.sh
+export CONDA_INIT_SCRIPT=/usr/common/software/python/3.8-anaconda-2020.11/etc/profile.d/conda.sh
+source $CONDA_INIT_SCRIPT
 
 # Print some stuff
 echo "Configuring on $(hostname) as $USER for $SYSTEM_ARCH"

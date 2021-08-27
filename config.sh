@@ -25,7 +25,8 @@ module load nccl/2.9.8
 #module load nvidia-nersc/20.11
 
 # Setup conda
-source /global/common/software/nersc/cos1.3/python/3.8-anaconda-2020.11/etc/profile.d/conda.sh
+export CONDA_INIT_SCRIPT=/global/common/software/nersc/cos1.3/python/3.8-anaconda-2020.11/etc/profile.d/conda.sh
+source $CONDA_INIT_SCRIPT
 
 # Print some stuff
 echo "Configuring on $(hostname) as $USER"
