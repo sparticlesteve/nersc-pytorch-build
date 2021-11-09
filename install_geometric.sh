@@ -6,4 +6,4 @@
 echo "Installing PyTorch Geometric"
 
 # Install via conda
-mamba install -y pytorch-geometric -c rusty1s -c conda-forge
+mamba install -y pyg -c pyg -c conda-forge
