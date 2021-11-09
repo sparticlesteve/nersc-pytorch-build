@@ -26,7 +26,7 @@ export CXX=CC #g++
 export CC=cc #gcc
 
 # Setup conda
-export CONDA_INIT_SCRIPT=/global/common/software/nersc/shasta2105/python/3.9-anaconda-2021.05/etc/profile.d/conda.sh
+export CONDA_INIT_SCRIPT=/global/common/software/nersc/shasta2105/python/3.8-anaconda-2021.05/etc/profile.d/conda.sh
 source $CONDA_INIT_SCRIPT
 
 # Print some stuff
