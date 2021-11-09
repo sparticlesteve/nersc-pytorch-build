@@ -33,4 +33,4 @@ source $CONDA_INIT_SCRIPT
 echo "Configuring on $(hostname) as $USER"
 echo "  Build directory $BUILD_DIR"
 echo "  Install directory $INSTALL_DIR"
-module list
+module -t list
