@@ -20,8 +20,8 @@ export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 # Setup programming environment
 module load PrgEnv-gnu gcc/9.3.0
 module load cuda/11.3.0
-module load cudnn/8.2.0
-module load nccl/2.9.8
+#module load cudnn/8.2.0
+#module load nccl/2.9.8
 export CXX=CC #g++
 export CC=cc #gcc
 
