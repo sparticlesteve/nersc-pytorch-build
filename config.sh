@@ -20,7 +20,9 @@ export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 # Setup programming environment
 module load PrgEnv-gnu gcc/9.3.0
 module load cuda/11.3.0
-#module load cudnn/8.2.0
+module load cudnn/8.2.0
+export NCCL_VERSION=2.10.3
+export NCCL_DIR=/opt/nvidia/hpc_sdk/Linux_x86_64/21.7/comm_libs/nccl
 #module load nccl/2.9.8
 export CXX=CC #g++
 export CC=cc #gcc
@@ -33,4 +35,4 @@ source $CONDA_INIT_SCRIPT
 echo "Configuring on $(hostname) as $USER"
 echo "  Build directory $BUILD_DIR"
 echo "  Install directory $INSTALL_DIR"
-module -t list
+module list

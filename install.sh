@@ -14,7 +14,7 @@ source config.sh $@
 conda activate $INSTALL_DIR
 
 # Build PyTorch and the rest
-./install_pytorch.sh 2>&1 | tee log.pytorch
+./build_pytorch.sh 2>&1 | tee log.pytorch
 ./build_apex.sh 2>&1 | tee log.apex
 ./build_geometric.sh 2>&1 | tee log.geometric
 ./build_mpi4py.sh 2>&1 | tee log.mpi4py
