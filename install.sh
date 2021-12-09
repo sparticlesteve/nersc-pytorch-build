@@ -1,4 +1,5 @@
 #!/bin/bash
+#SBATCH -A nstaff_g
 #SBATCH -C gpu
 #SBATCH -N 1 -n 1 -G 4 -c 128 -t 4:00:00
 #SBATCH -o slurm-build-%j.out

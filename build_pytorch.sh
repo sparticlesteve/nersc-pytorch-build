@@ -11,11 +11,17 @@ export USE_CUDA=1
 export USE_DISTRIBUTED=1
 export TORCH_CUDA_ARCH_LIST=8.0
 
+# Trying to pick up additional libs at build time
+#export LIBRARY_PATH=$LD_LIBRARY_PATH
+
+# Disable MPI
+#export USE_MPI=0
+
 # Using system NCCL
-export USE_SYSTEM_NCCL=1
-export NCCL_ROOT=$NCCL_DIR
-export NCCL_INCLUDE_DIR=$NCCL_DIR/include
-export NCCL_LIB_DIR=$NCCL_DIR/lib
+export USE_SYSTEM_NCCL=0
+#export NCCL_ROOT=$NCCL_DIR
+#export NCCL_INCLUDE_DIR=$NCCL_DIR/include
+#export NCCL_LIB_DIR=$NCCL_DIR/lib
 
 # Disabling test builds because of error
 #export BUILD_TEST=0
