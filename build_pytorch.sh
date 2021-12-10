@@ -13,6 +13,7 @@ export TORCH_CUDA_ARCH_LIST=8.0
 
 # Trying to pick up additional libs at build time
 #export LIBRARY_PATH=$LD_LIBRARY_PATH
+export CMAKE_PREFIX_PATH=/opt/nvidia/hpc_sdk/Linux_x86_64/21.9/math_libs/11.4:$CMAKE_PREFIX_PATH
 
 # Disable MPI
 #export USE_MPI=0

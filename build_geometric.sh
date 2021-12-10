@@ -9,7 +9,7 @@ echo "Building PyTorch Geometric"
 export CXX=g++
 export CC=gcc
 # Add sdk math_libs include path to find headers like cusparse.h
-#export CPATH=/opt/nvidia/hpc_sdk/Linux_x86_64/20.9/math_libs/11.0/include:$CPATH
+export CPATH=/opt/nvidia/hpc_sdk/Linux_x86_64/21.9/math_libs/11.4/include:$CPATH
 # Add lib paths to LIBRARY_PATH so linker can find them
 export LIBRARY_PATH=$LD_LIBRARY_PATH
 cd $BUILD_DIR

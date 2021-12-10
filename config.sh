@@ -23,7 +23,7 @@ export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 
 # Setup programming environment
 module load cmake
-module load PrgEnv-gnu #gcc/9.3.0
+module load PrgEnv-gnu gcc/9.3.0
 module load cudatoolkit/21.9_11.4
 #module load cuda/11.3.0
 
