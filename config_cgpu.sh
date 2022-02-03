@@ -32,7 +32,7 @@ export UCX_LOG_LEVEL=error
 export NCCL_IB_HCA=mlx5_0:1,mlx5_2:1,mlx5_4:1,mlx5_6:1
 
 # Setup conda
-export CONDA_INIT_SCRIPT=/usr/common/software/python/3.8-anaconda-2020.11/etc/profile.d/conda.sh
+export CONDA_INIT_SCRIPT=/usr/common/software/python/3.9-anaconda-2021.11/etc/profile.d/conda.sh
 source $CONDA_INIT_SCRIPT
 
 # Print some stuff
