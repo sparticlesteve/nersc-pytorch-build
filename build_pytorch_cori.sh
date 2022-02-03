@@ -37,14 +37,15 @@ fi
 echo "Building PyTorch"
 [ -d pytorch ] && rm -rf pytorch
 git clone --recursive --branch v${PYTORCH_VERSION} $PYTORCH_URL
-cd $BUILD_DIR/pytorch
+cd pytorch
 python setup.py install
+cd ..
 
 # Install torchvision
 echo "Building torchvision"
 [ -d vision ] && rm -rf vision
 git clone --branch v${VISION_VERSION} https://github.com/pytorch/vision.git
-cd $BUILD_DIR/vision
+cd vision
 # Cray compiler wrappers fail the validity checks in torch extensions,
 # so here we just explicitly use the bare gnu compiler commands.
 CXX=g++ CC=gcc python setup.py install
