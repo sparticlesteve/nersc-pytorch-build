@@ -41,3 +41,6 @@ echo "Building torchvision"
 git clone --branch v${VISION_VERSION} https://github.com/pytorch/vision.git
 cd $BUILD_DIR/vision
 python setup.py install
+
+# Now install pip packages that depend on pytorch
+pip install --no-cache-dir pytorch-lightning ray_lightning
