@@ -13,13 +13,12 @@ export TORCH_CUDA_ARCH_LIST=8.0
 
 # Trying to pick up additional libs at build time
 #export LIBRARY_PATH=$LD_LIBRARY_PATH
-export CMAKE_PREFIX_PATH=/opt/nvidia/hpc_sdk/Linux_x86_64/21.9/math_libs/11.4:$CMAKE_PREFIX_PATH
 
 # Disable MPI
 #export USE_MPI=0
 
 # Using system NCCL
-export USE_SYSTEM_NCCL=0
+export USE_SYSTEM_NCCL=1
 #export NCCL_ROOT=$NCCL_DIR
 #export NCCL_INCLUDE_DIR=$NCCL_DIR/include
 #export NCCL_LIB_DIR=$NCCL_DIR/lib
@@ -42,3 +41,6 @@ echo "Building torchvision"
 git clone --branch v${VISION_VERSION} https://github.com/pytorch/vision.git
 cd $BUILD_DIR/vision
 python setup.py install
+
+# Now install pip packages that depend on pytorch
+pip install --no-cache-dir pytorch-lightning ray_lightning
