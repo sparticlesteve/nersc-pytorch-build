@@ -23,8 +23,6 @@ module load PrgEnv-gnu gcc/11.2.0
 module load cudatoolkit/11.5
 module load cudnn/8.3.2
 module load nccl/2.11.4
-# FIXME: move this into the nccl modulefile!
-export NCCL_SOCKET_IFNAME=hsn
 
 # Pick up cuRand and cuSparse from separate directory
 export CMAKE_PREFIX_PATH=${CUDA_HOME}/../../math_libs:$CMAKE_PREFIX_PATH
