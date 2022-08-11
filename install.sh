@@ -7,7 +7,7 @@
 # Abort on failure
 set -e -o pipefail
 
-# Do the full installation for Cori-GPU
+# Do the full installation for Perlmutter
 source config.sh $@
 
 # Build the conda environment

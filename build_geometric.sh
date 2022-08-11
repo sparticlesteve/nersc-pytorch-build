@@ -14,10 +14,10 @@ cd $BUILD_DIR
 
 # Build METIS from source
 # Mostly taken from here:
-# https://github.com/rusty1s/pytorch_sparse/blob/master/script/metis.sh
+# https://github.com/rusty1s/pytorch_sparse/blob/master/.github/workflows/metis.sh
 METIS=metis-5.1.0
 export WITH_METIS=1
-wget -nv http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/${METIS}.tar.gz
+wget -nv "https://web.archive.org/web/20211119110155/http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/${METIS}.tar.gz"
 tar -xvzf ${METIS}.tar.gz
 cd ${METIS} || exit
 sed -i.bak -e 's/IDXTYPEWIDTH 32/IDXTYPEWIDTH 64/g' include/metis.h
