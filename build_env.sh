@@ -2,7 +2,7 @@
 
 # Make a conda env
 mamba create -y --prefix $INSTALL_DIR python=$PYTHON_VERSION pip \
-    astunparse numpy ninja pyyaml mkl mkl-include setuptools cffi \
+    astunparse numpy ninja pyyaml mkl mkl-include setuptools cffi pybind11 \
     typing_extensions future six requests dataclasses h5py ipython ipykernel \
     matplotlib scikit-learn pandas pillow pytables ipympl
 
