@@ -27,14 +27,22 @@ make install
 
 # Build and install the packages via pip
 export CPPFLAGS="-I${INSTALL_DIR}/include"
-#pip install requests # fixes an import error, do I still need this?
-pip install --verbose --no-cache-dir torch-scatter
-pip install --verbose --no-cache-dir torch-sparse
-pip install --verbose --no-cache-dir torch-cluster
-pip install --verbose torch-geometric
+export VERBOSE=1
+# pyg-lib currently not available in pypi, apparently
+#pip install --verbose --no-cache-dir pyg-lib
+#pip install --verbose --no-cache-dir torch-scatter
+#pip install --verbose --no-cache-dir torch-sparse
+#pip install --verbose --no-cache-dir torch-cluster
+#pip install --verbose torch-geometric
+
+# Install wheels, often incompatible with source-built pytorch
+#pip install --verbose --no-cache-dir \
+#    pyg-lib torch-scatter torch-sparse torch-cluster torch-geometric \
+#    -f https://data.pyg.org/whl/torch-1.13.0+cu117.html
 
 # Install master versions directly from github (sometimes needed)
-#pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_scatter.git
-#pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_sparse.git
-#pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_cluster.git
-#pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_geometric.git
+#pip install --verbose --no-cache-dir git+https://github.com/pyg-team/pyg-lib.git
+pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_scatter.git
+pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_sparse.git
+pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_cluster.git
+pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_geometric.git
