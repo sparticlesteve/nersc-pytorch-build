@@ -11,6 +11,9 @@ set -e -o pipefail
 # Do the full installation for Perlmutter
 source config.sh $@
 
+# Clean any previous install
+./clean.sh
+
 # Build the conda environment
 ./build_env.sh 2>&1 | tee log.env
 conda activate $INSTALL_DIR
