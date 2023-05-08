@@ -10,9 +10,9 @@ fi
 # Configure the installation
 export INSTALL_NAME="pytorch"
 export PYTHON_VERSION=3.9
-export PYTORCH_VERSION="1.13.1"
+export PYTORCH_VERSION="2.0.1"
 export PYTORCH_URL=https://github.com/pytorch/pytorch
-export VISION_VERSION="0.14.1"
+export VISION_VERSION="0.15.2"
 export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/$PYTORCH_VERSION
 export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 
@@ -20,7 +20,7 @@ export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 module load cmake
 module load PrgEnv-gnu gcc/11.2.0
 module load cudatoolkit/11.7
-module load cudnn/8.7.0
+module load cudnn/8.9.1_cuda11
 module load nccl/2.15.5-ofi
 module load evp-patch
 
