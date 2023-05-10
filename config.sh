@@ -27,9 +27,12 @@ module load cudnn/8.9.1_cuda11
 module load nccl/2.15.5-ofi
 module load evp-patch
 
-# Pick up cuRand and cuSparse from separate directory
+# Environment path "fixes"
+# - Pick up cuRand and cuSparse from separate directory
 export CMAKE_PREFIX_PATH=${CUDA_HOME}/../../math_libs:$CMAKE_PREFIX_PATH
-#export CPATH=${CUDA_HOME}/../../math_libs/include:$CPATH
+export CPATH=${CUDA_HOME}/../../math_libs/include:$CPATH
+# - Help pytorch test build find cudnn header
+export CPATH=${CUDNN_DIR}/include:$CPATH
 
 export CXX=CC #g++
 export CC=cc #gcc
