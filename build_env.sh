@@ -4,7 +4,7 @@
 mamba create -y --prefix $INSTALL_DIR python=$PYTHON_VERSION pip \
     astunparse numpy ninja pyyaml mkl mkl-include setuptools cffi pybind11 \
     typing_extensions future six requests dataclasses h5py ipython ipykernel \
-    matplotlib scikit-learn pandas pillow pytables ipympl
+    matplotlib scikit-learn pandas pillow pytables ipympl sympy
 
 # Install additional packages
 source $CONDA_INIT_SCRIPT
