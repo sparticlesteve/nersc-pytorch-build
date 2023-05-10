@@ -30,10 +30,8 @@ export USE_SYSTEM_NCCL=1
 # Build PyTorch
 echo "Building PyTorch"
 [ -d pytorch ] && rm -rf pytorch
-git clone --recursive --branch v${PYTORCH_VERSION} $PYTORCH_URL
+git clone --recursive --branch ${PYTORCH_BRANCH} $PYTORCH_URL
 cd $BUILD_DIR/pytorch
-# Patch for https://github.com/pytorch/pytorch/pull/97270
-sed -i -e 's/ Store::kDefaultTimeout/ ::c10d::Store::kDefaultTimeout/g' torch/csrc/distributed/c10d/ProcessGroupGloo.hpp
 python setup.py install
 cd ..
 
