@@ -1,5 +1,4 @@
 #!/bin/bash -e
-#SBATCH -A nstaff_g
 #SBATCH -C gpu
 #SBATCH -N 2
 #SBATCH --ntasks-per-node 4
