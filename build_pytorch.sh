@@ -19,13 +19,13 @@ export TORCH_CUDA_ARCH_LIST=8.0
 
 # Using system NCCL
 export USE_SYSTEM_NCCL=1
-#export NCCL_ROOT=$NCCL_DIR
-#export NCCL_INCLUDE_DIR=$NCCL_DIR/include
-#export NCCL_LIB_DIR=$NCCL_DIR/lib
 
-# Disabling test builds because of error
-#export BUILD_TEST=0
-#export CUDNN_ROOT=$CUDNN_DIR
+# Disabling some build components
+export BUILD_TEST=0
+export USE_NNPACK=0
+export USE_QNNPACK=0
+export USE_PYTORCH_QNNPACK=0
+export USE_XNNPACK=0
 
 # Build PyTorch
 echo "Building PyTorch"
@@ -38,9 +38,10 @@ cd ..
 # Install torchvision
 echo "Building torchvision"
 [ -d vision ] && rm -rf vision
-git clone --branch v${VISION_VERSION} https://github.com/pytorch/vision.git
+git clone --branch $VISION_BRANCH https://github.com/pytorch/vision.git
 cd $BUILD_DIR/vision
 python setup.py install
 
 # Now install pip packages that depend on pytorch
-pip install --no-cache-dir pytorch-lightning ray_lightning
+pip install --no-cache-dir lightning
+pip install --no-cache-dir -v --extra-index-url https://developer.download.nvidia.com/compute/redist --upgrade nvidia-dali-cuda120
