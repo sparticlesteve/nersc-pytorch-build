@@ -10,11 +10,11 @@ fi
 # Configure the installation
 export INSTALL_NAME="pytorch"
 export PYTHON_VERSION=3.10
-export PYTORCH_VERSION="2.1.0-rc1"
+export PYTORCH_VERSION="2.1.0"
 export PYTORCH_BRANCH="v${PYTORCH_VERSION}"
 export PYTORCH_URL=https://github.com/pytorch/pytorch.git
-#export VISION_VERSION="0.15.2"
-export VISION_BRANCH="main"
+export VISION_VERSION="0.16.0"
+export VISION_BRANCH="v${VISION_VERSION}"
 export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/$PYTORCH_VERSION
 export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 
