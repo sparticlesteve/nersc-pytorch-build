@@ -2,7 +2,7 @@
 
 if [ $USER == "swowner" ]; then
     umask 002 # all-readable
-    INSTALL_BASE=/global/common/software/nersc/pm-2022q4/sw
+    INSTALL_BASE=/global/common/software/nersc/pm-stable/sw
 else
     INSTALL_BASE=$SCRATCH/conda
 fi
