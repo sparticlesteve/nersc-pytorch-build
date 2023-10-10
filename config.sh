@@ -40,8 +40,7 @@ export CXX=CC #g++
 export CC=cc #gcc
 
 # Setup conda
-export CONDA_INIT_SCRIPT=/global/common/software/nersc/pm-2022q3/sw/python/3.9-anaconda-2021.11/etc/profile.d/conda.sh
-source $CONDA_INIT_SCRIPT
+module load conda
 
 # Print some stuff
 echo "Configuring on $(hostname) as $USER"

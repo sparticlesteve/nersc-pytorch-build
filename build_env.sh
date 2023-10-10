@@ -7,7 +7,7 @@ mamba create -y --prefix $INSTALL_DIR python=$PYTHON_VERSION pip \
     matplotlib scikit-learn pandas pillow pytables ipympl sympy
 
 # Install additional packages
-source $CONDA_INIT_SCRIPT
+module load conda
 conda activate $INSTALL_DIR
 pip install --no-cache-dir ray ray[tune] tensorboard tqdm wandb ruamel.yaml gpustat \
     pytest opencv-python scikit-image \
