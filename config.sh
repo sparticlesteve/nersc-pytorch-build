@@ -15,6 +15,7 @@ export PYTORCH_URL=https://github.com/pytorch/pytorch
 export VISION_VERSION="0.14.1"
 export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/$PYTORCH_VERSION
 export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
+export MAX_JOBS=8
 
 # Setup programming environment
 module load cmake
@@ -22,7 +23,6 @@ module load PrgEnv-gnu gcc/11.2.0
 module load cudatoolkit/11.7
 module load cudnn/8.7.0
 module load nccl/2.15.5-ofi
-module load evp-patch
 
 # Pick up cuRand and cuSparse from separate directory
 export CMAKE_PREFIX_PATH=${CUDA_HOME}/../../math_libs:$CMAKE_PREFIX_PATH
