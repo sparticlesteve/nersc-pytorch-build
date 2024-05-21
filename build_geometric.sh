@@ -30,10 +30,10 @@ export CPPFLAGS="-I${INSTALL_DIR}/include"
 export VERBOSE=1
 # pyg-lib currently not available in pypi, apparently
 #pip install --verbose --no-cache-dir pyg-lib
-#pip install --verbose --no-cache-dir torch-scatter
-#pip install --verbose --no-cache-dir torch-sparse
-#pip install --verbose --no-cache-dir torch-cluster
-#pip install --verbose torch-geometric
+pip install --verbose --no-cache-dir torch-scatter
+pip install --verbose --no-cache-dir torch-sparse
+pip install --verbose --no-cache-dir torch-cluster
+pip install --verbose torch-geometric
 
 # Install wheels, often incompatible with source-built pytorch
 #pip install --verbose --no-cache-dir \
@@ -42,7 +42,7 @@ export VERBOSE=1
 
 # Install master versions directly from github (sometimes needed)
 #pip install --verbose --no-cache-dir git+https://github.com/pyg-team/pyg-lib.git
-pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_scatter.git
-pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_sparse.git
-pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_cluster.git
-pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_geometric.git
+#pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_scatter.git
+#pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_sparse.git
+#pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_cluster.git
+#pip install --verbose --no-cache-dir git+https://github.com/rusty1s/pytorch_geometric.git
