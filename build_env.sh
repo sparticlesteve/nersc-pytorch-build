@@ -4,7 +4,8 @@
 mamba create -y --prefix $INSTALL_DIR python=$PYTHON_VERSION pip \
     astunparse numpy ninja pyyaml mkl mkl-include setuptools cffi pybind11 \
     typing_extensions future six requests dataclasses h5py ipython ipykernel \
-    matplotlib scikit-learn pandas pillow pytables ipympl sympy
+    matplotlib scikit-learn pandas pillow pytables ipympl sympy \
+    libgcc-ng=13 libstdcxx-ng=13 # avoids conflicts with gcc-native/12.3
 
 # Install additional packages
 module load conda
