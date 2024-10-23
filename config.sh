@@ -10,10 +10,10 @@ fi
 # Configure the installation
 export INSTALL_NAME="pytorch"
 export PYTHON_VERSION=3.11
-export PYTORCH_VERSION="2.3.1"
+export PYTORCH_VERSION="2.4.0"
 export PYTORCH_BRANCH="v${PYTORCH_VERSION}"
 export PYTORCH_URL=https://github.com/pytorch/pytorch.git
-export VISION_VERSION="0.18.0"
+export VISION_VERSION="0.19.0"
 export VISION_BRANCH="v${VISION_VERSION}"
 export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/$PYTORCH_VERSION
 export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
@@ -21,7 +21,7 @@ export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 # Setup programming environment
 module load cmake
 module load PrgEnv-gnu gcc-native/12.3
-module load cudatoolkit/12.2
+module load cudatoolkit/12.4
 module load cudnn/9.1.0
 module load nccl/2.21.5
 module unload craype-accel-nvidia80
