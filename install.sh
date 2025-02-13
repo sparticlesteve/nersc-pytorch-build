@@ -11,18 +11,44 @@ set -e -o pipefail
 # Use local modulefiles
 module use /global/homes/s/sfarrell/WorkAreas/software/modulefiles/src
 
-# Do the full installation for Perlmutter
-source config.sh $@
+# Source utilities
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/scripts/utils/logging.sh"
+
+# Setup logging
+export LOG_LEVEL=2
+log_info "Starting PyTorch installation"
+
+# Source configuration
+source "${SCRIPT_DIR}/scripts/config/base_config.sh"
 
 # Clean any previous install
 ./clean.sh
 
+# Create required directories
+mkdir -p "$BUILD_DIR" "$INSTALL_DIR"
+
 # Build the conda environment
-./build_env.sh 2>&1 | tee log.env
+log_info "Starting build of base environment"
+./build_env.sh 2>&1 | tee logs/build_env.log
 conda activate $INSTALL_DIR
 
-# Build PyTorch and the rest
-./build_pytorch.sh 2>&1 | tee log.pytorch
-./build_apex.sh 2>&1 | tee log.apex
-./build_geometric.sh 2>&1 | tee log.geometric
-./build_mpi4py.sh 2>&1 | tee log.mpi4py
+# Build the rest in order
+builds=(
+    "pytorch"
+    "apex"
+    "geometric"
+    "mpi4py"
+)
+
+for build in "${builds[@]}"; do
+    log_info "Starting build of $build"
+    if "./build_${build}.sh" 2>&1 | tee "logs/build_${build}.log"; then
+        log_info "Successfully completed build of $build"
+    else
+        log_error "Failed to build $build"
+        exit 1
+    fi
+done
+
+log_info "Installation completed successfully"

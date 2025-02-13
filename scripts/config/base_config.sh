@@ -1,5 +1,9 @@
 # Source me to setup config for the installations
 
+source "$(dirname "${BASH_SOURCE[0]}")/../utils/logging.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../utils/validation.sh"
+
+# Improve this
 if [ $USER == "swowner" ]; then
     umask 002 # all-readable
     INSTALL_BASE=/global/common/software/nersc9
@@ -10,7 +14,7 @@ fi
 # Configure the installation
 export INSTALL_NAME="pytorch"
 export PYTHON_VERSION=3.12
-export PYTORCH_VERSION="2.5.1"
+export PYTORCH_VERSION="2.6.0"
 export PYTORCH_BRANCH="v${PYTORCH_VERSION}"
 export PYTORCH_URL=https://github.com/pytorch/pytorch.git
 export VISION_VERSION="0.20.0"
@@ -40,6 +44,10 @@ export CC=cc #gcc
 
 # Setup conda
 module load conda
+
+# Validate configuration
+validate_env_vars #|| exit 1
+validate_dependencies #|| exit 1
 
 # Print some stuff
 echo "Configuring on $(hostname) as $USER"
