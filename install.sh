@@ -8,6 +8,9 @@
 # Abort on failure
 set -e -o pipefail
 
+# Use local modulefiles
+module use /global/homes/s/sfarrell/WorkAreas/software/modulefiles/src
+
 # Do the full installation for Perlmutter
 source config.sh $@
 
