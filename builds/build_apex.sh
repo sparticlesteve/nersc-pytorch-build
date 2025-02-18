@@ -4,8 +4,8 @@
 # https://nvidia.github.io/apex/
 
 echo "Building NVIDIA Apex"
+cd $BUILD_DIR
 
-mkdir -p $BUILD_DIR && cd $BUILD_DIR
 [ -d apex ] && rm -rf apex
 git clone https://github.com/NVIDIA/apex
 cd apex

@@ -6,52 +6,62 @@
 #SBATCH -o slurm-build-%j.out
 
 # Abort on failure
-set -e -o pipefail
+set -eo pipefail
 
 # Use local modulefiles
 module use /global/homes/s/sfarrell/WorkAreas/software/modulefiles/src
 
-# Source utilities
+# Source configuration and utilities
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/scripts/utils/logging.sh"
-
-# Setup logging
 export LOG_LEVEL=2
+source "${SCRIPT_DIR}/config/base_config.sh"
+
 log_info "Starting PyTorch installation"
 
-# Source configuration
-source "${SCRIPT_DIR}/scripts/config/base_config.sh"
-
-# Clean any previous install
-# TODO: find a safer and more flexible way to do this (reuse when desired).
-./clean.sh
-
-# Create required directories
-mkdir -p "$BUILD_DIR" "$INSTALL_DIR" logs
-
-# Build the conda environment
-# Consider revamping this to be a yaml file or something
-log_info "Starting build of base environment"
-${SCRIPT_DIR}/builds/build_env.sh 2>&1 | tee logs/build_env.log
-conda activate $INSTALL_DIR
-
-# Build the rest in order
-builds=(
-    "pytorch"
-    "apex"
-    "geometric"
-    "mpi4py"
-)
-
-# Make this a function
-for build in "${builds[@]}"; do
+# Build step function
+build_step() {
+    local build="$1"
     log_info "Starting build of $build"
     if "${SCRIPT_DIR}/builds/build_${build}.sh" 2>&1 | tee "logs/build_${build}.log"; then
         log_info "Successfully completed build of $build"
     else
         log_error "Failed to build $build"
-        exit 1
+        return 1
     fi
-done
+}
+
+# Clean any previous install
+if ${CLEAN_INSTALL:-false}; then
+    log_info "Cleaning up any previous installation artifacts"
+    ${SCRIPT_DIR}/clean.sh
+fi
+
+# Create required directories
+mkdir -p "$BUILD_DIR" "$INSTALL_DIR" logs
+
+# Build the base conda environment
+if ${BUILD_ENV:-false}; then
+    build_step env
+fi
+log_info "Activating environment"
+activate_environment
+log_info "Done activating environment"
+
+# Build pytorch and the rest
+if ${BUILD_PYTORCH:-false}; then
+    build_step pytorch
+fi
+if ${BUILD_EXTRAS:-false}; then
+    build_step extras
+fi
+if ${BUILD_APEX:-true}; then
+    build_step apex
+fi
+if ${BUILD_GEOMETRIC:-true}; then
+    build_step geometric
+fi
+if ${BUILD_MPI4PY:-true}; then
+    build_step mpi4py
+fi
 
 log_info "Installation completed successfully"

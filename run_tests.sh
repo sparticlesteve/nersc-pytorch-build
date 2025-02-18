@@ -14,8 +14,10 @@
 module use /global/homes/s/sfarrell/WorkAreas/software/modulefiles/src
 
 # Setup software
-. config.sh
-conda activate $INSTALL_DIR
+#. config.sh
+source ./config/base_config.sh
+activate_environment
+#conda activate $INSTALL_DIR
 
 # Run tests
 cd nersc-pytorch-testing

@@ -2,6 +2,7 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/../utils/logging.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/../utils/validation.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../utils/env_utils.sh"
 
 # Improve this
 if [ $USER == "swowner" ]; then
@@ -17,18 +18,20 @@ export PYTHON_VERSION=3.12
 export PYTORCH_VERSION="2.6.0"
 export PYTORCH_BRANCH="v${PYTORCH_VERSION}"
 export PYTORCH_URL=https://github.com/pytorch/pytorch.git
-export VISION_VERSION="0.20.0"
+export VISION_VERSION="0.21.0"
 export VISION_BRANCH="v${VISION_VERSION}"
+#export CUDA_VERSION=12.6
 export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/$PYTORCH_VERSION
 export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
+export CMAKE_PREFIX_PATH=$INSTALL_DIR:${CMAKE_PREFIX_PATH:-}
 
 # Setup programming environment
+module load conda
 module load cmake
 module load PrgEnv-gnu gcc-native/12.3
 module load cudatoolkit/12.4
-#module load cudnn/9.5.0
-module load nccl/2.21.5
-module unload craype-accel-nvidia80
+module load cudnn/9.5.0
+module load nccl/2.24.3
 export MPICH_GPU_SUPPORT_ENABLED=0
 export MAX_JOBS=16
 
@@ -41,9 +44,6 @@ export MAX_JOBS=16
 
 export CXX=CC #g++
 export CC=cc #gcc
-
-# Setup conda
-module load conda
 
 # Validate configuration
 validate_env_vars #|| exit 1

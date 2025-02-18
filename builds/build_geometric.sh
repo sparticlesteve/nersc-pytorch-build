@@ -8,6 +8,7 @@ echo "Building PyTorch Geometric"
 # Drop the cray compiler wrappers, they aren't currently working here.
 export CXX=g++
 export CC=gcc
+export TORCH_CUDA_ARCH_LIST=8.0
 # Add lib paths to LIBRARY_PATH so linker can find them
 export LIBRARY_PATH=$LD_LIBRARY_PATH
 cd $BUILD_DIR
