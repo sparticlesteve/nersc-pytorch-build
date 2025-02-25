@@ -10,9 +10,12 @@
 # Clone the testing repository
 [ -d nersc-pytorch-testing ] || git clone https://github.com/sparticlesteve/nersc-pytorch-testing.git
 
+# Use local modulefiles
+module use /global/homes/s/sfarrell/WorkAreas/software/modulefiles/src
+
 # Setup software
-. config.sh
-conda activate $INSTALL_DIR
+source ./config/base_config.sh
+activate_environment
 
 # Run tests
 cd nersc-pytorch-testing

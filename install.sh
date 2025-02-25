@@ -6,20 +6,57 @@
 #SBATCH -o slurm-build-%j.out
 
 # Abort on failure
-set -e -o pipefail
+set -eo pipefail
 
-# Do the full installation for Perlmutter
-source config.sh $@
+# Source configuration and utilities
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export LOG_LEVEL=2
+source "${SCRIPT_DIR}/config/base_config.sh"
+
+log_info "Starting PyTorch installation"
+
+# Build step function
+build_step() {
+    local build="$1"
+    log_info "Starting build of $build"
+    if "${SCRIPT_DIR}/builds/build_${build}.sh" 2>&1 | tee "logs/build_${build}.log"; then
+        log_info "Successfully completed build of $build"
+    else
+        log_error "Failed to build $build"
+        return 1
+    fi
+}
 
 # Clean any previous install
-./clean.sh
+if ${CLEAN_INSTALL:-false}; then
+    log_info "Cleaning up any previous installation artifacts"
+    ${SCRIPT_DIR}/clean.sh
+fi
 
-# Build the conda environment
-./build_env.sh 2>&1 | tee log.env
-conda activate $INSTALL_DIR
+# Create required directories
+mkdir -p "$BUILD_DIR" "$INSTALL_DIR" logs
 
-# Build PyTorch and the rest
-./build_pytorch.sh 2>&1 | tee log.pytorch
-./build_apex.sh 2>&1 | tee log.apex
-./build_geometric.sh 2>&1 | tee log.geometric
-./build_mpi4py.sh 2>&1 | tee log.mpi4py
+# Build the base conda environment
+if ${BUILD_ENV:-true}; then
+    build_step env
+fi
+activate_environment
+
+# Build pytorch and the rest
+if ${BUILD_PYTORCH:-true}; then
+    build_step pytorch
+fi
+if ${BUILD_EXTRAS:-true}; then
+    build_step extras
+fi
+if ${BUILD_APEX:-true}; then
+    build_step apex
+fi
+if ${BUILD_GEOMETRIC:-true}; then
+    build_step geometric
+fi
+if ${BUILD_MPI4PY:-true}; then
+    build_step mpi4py
+fi
+
+log_info "Installation completed successfully"
