@@ -8,9 +8,6 @@
 # Abort on failure
 set -eo pipefail
 
-# Use local modulefiles
-module use /global/homes/s/sfarrell/WorkAreas/software/modulefiles/src
-
 # Source configuration and utilities
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export LOG_LEVEL=2
@@ -40,18 +37,16 @@ fi
 mkdir -p "$BUILD_DIR" "$INSTALL_DIR" logs
 
 # Build the base conda environment
-if ${BUILD_ENV:-false}; then
+if ${BUILD_ENV:-true}; then
     build_step env
 fi
-log_info "Activating environment"
 activate_environment
-log_info "Done activating environment"
 
 # Build pytorch and the rest
-if ${BUILD_PYTORCH:-false}; then
+if ${BUILD_PYTORCH:-true}; then
     build_step pytorch
 fi
-if ${BUILD_EXTRAS:-false}; then
+if ${BUILD_EXTRAS:-true}; then
     build_step extras
 fi
 if ${BUILD_APEX:-true}; then
