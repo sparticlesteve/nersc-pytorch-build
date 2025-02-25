@@ -8,6 +8,3 @@ pip install --no-cache-dir -v --upgrade \
     accelerate datasets evaluate transformers gpustat pytest opencv-python \
     scikit-image torch_tb_profiler nvidia-dali-cuda120 \
     git+https://github.com/NERSC/nersc-tensorboard-helper.git
-
-# NVIDIA DALI library for accelerated I/O
-#pip install --no-cache-dir -v --extra-index-url https://developer.download.nvidia.com/compute/redist --upgrade nvidia-dali-cuda120

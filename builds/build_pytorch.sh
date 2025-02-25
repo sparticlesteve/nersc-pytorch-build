@@ -24,7 +24,7 @@ export USE_XNNPACK=0
 # Trying to pick up additional libs at build time
 #export LIBRARY_PATH=$LD_LIBRARY_PATH
 
-# Trying to enable cuda from conda in pytorch build
+# Here I was trying to enable cuda from conda in pytorch build
 #export CUDA_HOME=$CONDA_PREFIX
 #export LD_LIBRARY_PATH=$CUDA_HOME/lib:$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 #export CUDA_INCLUDE_DIRS=$CONDA_PREFIX/targets/x86_64-linux/include
@@ -32,10 +32,6 @@ export USE_XNNPACK=0
 #export CUDNN_INCLUDE_DIR=$CUDA_HOME/include
 #export CUDNN_LIB_DIR=$CUDA_HOME/lib
 #export CUDNN_ROOT=$CUDA_HOME
-
-# Trying to fix a dumb compiler issue
-#export CXXFLAGS="-I${BUILD_DIR}/pytorch/c10/util $CXXFLAGS"
-#export CXXFLAGS="-I/usr/include $CXXFLAGS"
 
 # Perform builds in the build dir
 cd $BUILD_DIR
@@ -53,7 +49,7 @@ pip install mkl-static mkl-include
 make triton
 python setup.py install
 
-## DEBUGGING
+## DEBUGGING cmake issues
 #set -x
 #python setup.py clean
 #python setup.py build --cmake-only
@@ -66,7 +62,3 @@ git clone --branch $VISION_BRANCH https://github.com/pytorch/vision.git
 pushd vision
 python setup.py install
 popd
-
-## Now install pip packages that depend on pytorch
-#pip install --no-cache-dir lightning
-#pip install --no-cache-dir -v --extra-index-url https://developer.download.nvidia.com/compute/redist --upgrade nvidia-dali-cuda120
