@@ -28,7 +28,7 @@ export CMAKE_PREFIX_PATH=$INSTALL_DIR:${CMAKE_PREFIX_PATH:-}
 # Setup programming environment
 module load conda
 module load cmake
-module load PrgEnv-gnu gcc-native/12.3
+module load PrgEnv-gnu gcc-native/13.2
 module load cudatoolkit/12.4
 module load cudnn/9.5.0
 module load nccl/2.24.3
