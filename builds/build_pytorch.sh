@@ -56,13 +56,13 @@ pushd pytorch
 pip install -r requirements.txt
 pip install mkl-static mkl-include
 make triton
-python setup.py install
 
-## DEBUGGING cmake issues
-#set -x
-#python setup.py clean
-#python setup.py build --cmake-only
-#popd
+# Do the actual build
+python setup.py bdist_wheel
+# Install the wheel
+pip install dist/*.whl
+
+popd
 
 # Install torchvision
 echo "Building torchvision"
@@ -76,5 +76,10 @@ fi
 [ -d vision ] || git clone --branch $VISION_BRANCH https://github.com/pytorch/vision.git
 
 pushd vision
-python setup.py install
+
+# Do the build and install
+python setup.py bdist_wheel
+# Install the wheel
+pip install dist/*.whl
+
 popd
