@@ -41,9 +41,18 @@ env | grep CUDA
 
 # Build PyTorch
 echo "Building PyTorch"
-#[ -d pytorch ] && rm -rf pytorch
+
+# Unless RESUME_PYTORCH_BUILD flag is set, remove existing directory
+if [ "${RESUME_PYTORCH_BUILD}" != "true" ]; then
+    [ -d pytorch ] && rm -rf pytorch
+fi
+
+# Clone the repo is directory doesn't exist
 [ -d pytorch ] || git clone --recursive --branch $PYTORCH_BRANCH $PYTORCH_URL
+
 pushd pytorch
+
+# Install additional requirements
 pip install -r requirements.txt
 pip install mkl-static mkl-include
 make triton
@@ -57,8 +66,15 @@ python setup.py install
 
 # Install torchvision
 echo "Building torchvision"
-[ -d vision ] && rm -rf vision
-git clone --branch $VISION_BRANCH https://github.com/pytorch/vision.git
+
+# Unless RESUME_PYTORCH_BUILD flag is set, remove existing directory
+if [ "${RESUME_PYTORCH_BUILD}" != "true" ]; then
+    [ -d vision ] && rm -rf vision
+fi
+
+# Clone the repo is directory doesn't exist
+[ -d vision ] || git clone --branch $VISION_BRANCH https://github.com/pytorch/vision.git
+
 pushd vision
 python setup.py install
 popd
