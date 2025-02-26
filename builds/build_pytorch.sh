@@ -41,24 +41,45 @@ env | grep CUDA
 
 # Build PyTorch
 echo "Building PyTorch"
-#[ -d pytorch ] && rm -rf pytorch
+
+# Unless RESUME_PYTORCH_BUILD flag is set, remove existing directory
+if [ "${RESUME_PYTORCH_BUILD}" != "true" ]; then
+    [ -d pytorch ] && rm -rf pytorch
+fi
+
+# Clone the repo is directory doesn't exist
 [ -d pytorch ] || git clone --recursive --branch $PYTORCH_BRANCH $PYTORCH_URL
+
 pushd pytorch
+
+# Install additional requirements
 pip install -r requirements.txt
 pip install mkl-static mkl-include
 make triton
-python setup.py install
 
-## DEBUGGING cmake issues
-#set -x
-#python setup.py clean
-#python setup.py build --cmake-only
-#popd
+# Do the actual build
+python setup.py bdist_wheel
+# Install the wheel
+pip install dist/*.whl
+
+popd
 
 # Install torchvision
 echo "Building torchvision"
-[ -d vision ] && rm -rf vision
-git clone --branch $VISION_BRANCH https://github.com/pytorch/vision.git
+
+# Unless RESUME_PYTORCH_BUILD flag is set, remove existing directory
+if [ "${RESUME_PYTORCH_BUILD}" != "true" ]; then
+    [ -d vision ] && rm -rf vision
+fi
+
+# Clone the repo is directory doesn't exist
+[ -d vision ] || git clone --branch $VISION_BRANCH https://github.com/pytorch/vision.git
+
 pushd vision
-python setup.py install
+
+# Do the build and install
+python setup.py bdist_wheel
+# Install the wheel
+pip install dist/*.whl
+
 popd
