@@ -15,23 +15,25 @@ fi
 # Configure the installation
 export INSTALL_NAME="pytorch"
 export PYTHON_VERSION=3.12
-export PYTORCH_VERSION="2.6.0"
+export PYTORCH_VERSION="2.8.0"
 export PYTORCH_BRANCH="v${PYTORCH_VERSION}"
 export PYTORCH_URL=https://github.com/pytorch/pytorch.git
-export VISION_VERSION="0.21.0"
+export PYTORCH_INSTALL_OPTS="--index-url https://download.pytorch.org/whl/cu129"
+export VISION_VERSION="0.23.0"
 export VISION_BRANCH="v${VISION_VERSION}"
 export RESUME_PYTORCH_BUILD=${RESUME_PYTORCH_BUILD:-false}
-#export CUDA_VERSION=12.6 # previously used to control conda install
+#export CUDA_VERSION=12.9 # previously used to control conda install
 export BUILD_DIR=$SCRATCH/pytorch-build/$INSTALL_NAME/$PYTORCH_VERSION
 export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 export CMAKE_PREFIX_PATH=$INSTALL_DIR:${CMAKE_PREFIX_PATH:-}
+export USE_CRAY_COMPILER_WRAPPERS=false
 
 # Setup programming environment
 module load conda
 module load cmake
 module load PrgEnv-gnu gcc-native/13.2
-module load cudatoolkit/12.4
-module load cudnn/9.5.0
+module load cudatoolkit/12.9
+#module load cudnn/9.5.0
 module load nccl/2.24.3
 export MPICH_GPU_SUPPORT_ENABLED=0
 export MAX_JOBS=16
@@ -43,8 +45,13 @@ export MAX_JOBS=16
 # - Help pytorch test build find cudnn header
 #export CPATH=${CUDNN_DIR}/include:$CPATH
 
-export CXX=CC #g++
-export CC=cc #gcc
+if $USE_CRAY_COMPILER_WRAPPERS; then
+    export CXX=CC
+    export CC=cc
+else
+    export CXX=g++
+    export CC=gcc
+fi
 
 # Validate configuration
 validate_env_vars #|| exit 1
