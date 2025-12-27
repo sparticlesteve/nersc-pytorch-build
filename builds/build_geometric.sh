@@ -18,7 +18,9 @@ cd $BUILD_DIR
 # https://github.com/rusty1s/pytorch_sparse/blob/master/.github/workflows/metis.sh
 METIS=metis-5.1.0
 export WITH_METIS=1
-wget -nv "https://web.archive.org/web/20211119110155/http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/${METIS}.tar.gz"
+# web archive path is down; using an available mirror on github
+#wget -nv "https://web.archive.org/web/20211119110155/http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/${METIS}.tar.gz"
+wget -nv "https://github.com/xijunke/METIS-1/raw/refs/heads/master/${METIS}.tar.gz"
 tar -xvzf ${METIS}.tar.gz
 cd ${METIS} || exit
 sed -i.bak -e 's/IDXTYPEWIDTH 32/IDXTYPEWIDTH 64/g' include/metis.h
