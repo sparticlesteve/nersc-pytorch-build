@@ -31,12 +31,14 @@ make install
 # Build and install the packages via pip
 export CPPFLAGS="-I${INSTALL_DIR}/include"
 export VERBOSE=1
+# Sanity check: ensure torch is importable in this environment.
+python -c "import torch; print(torch.__version__)"
 # pyg-lib currently not available in pypi, apparently
 #pip install --verbose --no-cache-dir pyg-lib
-pip install --verbose --no-cache-dir torch-scatter
-pip install --verbose --no-cache-dir torch-sparse
-pip install --verbose --no-cache-dir torch-cluster
-pip install --verbose torch-geometric
+pip install --verbose --no-cache-dir --no-build-isolation torch-scatter
+pip install --verbose --no-cache-dir --no-build-isolation torch-sparse
+pip install --verbose --no-cache-dir --no-build-isolation torch-cluster
+pip install --verbose --no-build-isolation torch-geometric
 
 # Install wheels, often incompatible with source-built pytorch
 #pip install --verbose --no-cache-dir \
