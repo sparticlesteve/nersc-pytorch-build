@@ -26,6 +26,7 @@ export INSTALL_DIR=$INSTALL_BASE/$INSTALL_NAME/$PYTORCH_VERSION
 export CMAKE_PREFIX_PATH=$INSTALL_DIR:${CMAKE_PREFIX_PATH:-}
 
 # Setup programming environment
+export CMAKE_POLICY_VERSION_MINIMUM=3.5
 module load conda
 module load cmake
 module load PrgEnv-gnu gcc-native/13.2
