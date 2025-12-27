@@ -11,7 +11,7 @@
 [ -d nersc-pytorch-testing ] || git clone https://github.com/sparticlesteve/nersc-pytorch-testing.git
 
 # Use local modulefiles
-module use /global/homes/s/sfarrell/WorkAreas/software/modulefiles/src
+#module use /global/homes/s/sfarrell/WorkAreas/software/modulefiles/src
 
 # Setup software
 source ./config/base_config.sh
